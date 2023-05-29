@@ -31,7 +31,7 @@ id: nns-bundle-sample                   # A globally unique identifier for the p
 name: Sample Package                    # The human-readable name of the package
 description: |                          # (Opt) a description of the package
   A sample package.
-author: teragav17                       # the author of the package
+author: Somebody                        # the author of the package
 version: 0.1.1                          # the version of the package
 manifest:
   programs:                             # (Opt) a list of programs in the package
