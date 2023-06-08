@@ -13,7 +13,7 @@ NAPA is a package format for NABU adaptor content. It allows authors to package 
 ## What is a NAPA package?
 
 ```bash
-    /package id/ [OR] package.napa
+    /package id/    # [OR] package.napa
     |── napa.yaml   # NAPA manifest
     ├── /programs/  # NABU programs (.nabu files)
     ├── /storage/   # storage files   
