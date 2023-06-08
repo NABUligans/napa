@@ -18,7 +18,6 @@ NAPA is a package format for NABU adaptor content. It allows authors to package 
     ├── /programs/  # NABU programs (.nabu files)
     ├── /storage/   # storage files   
     ├── /paks/      # paks (unencrypted, unspooled, .nabu files)
-    ├── /sources/   # source lists in any compatible format
     └── /.../       # other content the adaptor can do something with
 ```
 
