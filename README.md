@@ -40,7 +40,7 @@ manifest:
       name: Sick Game
   storage:                              # Any special file handling needed
     - path: lake-house.file             # The path to the file in the `storage` folder
-      name: ice-cream.file              # Storage relative destination path
+      name: ice-cream.file              # Storage relative destination path (if required)
       options:                           
         updatetype: copy                # Copy, move, or symlink (default: symlink)
     - path: https://site/dir/file        # Urls are supported in all path elements
