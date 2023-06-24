@@ -1,0 +1,94 @@
+id: nns-bundle-classic-nabu-cycles
+name: Classic NABU Network Cycles
+description: |
+  The classic 1984 NABU Network experience.
+  AND Cycle Direct: skip the menu! 
+author: The NABU Network
+version: 1.0.0
+manifest:
+  paks:
+    - path: cycle1
+      name: 1984 Cycle 1
+    - path: cycle2
+      name: 1984 Cycle 2
+    - path: direct
+      name: Cycle Direct
+      options:
+        exploitloader: true
+features: {}
+path: nns-bundle-classic-nabu-cycles.napa
+---
+id: nns-bundle-ishkurcpm
+name: Ishkur CPM
+description: |
+  Ishkur is a flavor of CPM 2.2 made for the NABU from the ground up. System files are loaded via NHACP. 
+  This is the 'hybrid' flavor, and supports real drives (C & D) as well as cloud disks (A,B,E,etc).
+author: teragav17
+version: 0.1.2306241533
+manifest:
+  programs:
+    - path: NFS_HYBRID_BOOT.nabu
+      name: Ishkur CPM NFS
+    - path: NDSK_HYBRID_BOOT.nabu
+      name: Ishkur CPM NDSK
+  storage:
+    - path: NDSK_A.IMG
+      options:
+        updatetype: copy
+features:
+  NHACPv01: true
+
+path: nns-bundle-ishkurcpm.napa
+---
+id: nns-bundle-nabuca
+name: NABU.ca
+description: |
+  Support for the NABU.ca feed and files for Cloud CP/M
+author: NABU.ca
+version: 1.0.0
+manifest:
+  sources:
+    - path: https://cloud.nabu.ca/HomeBrew/titles/filesv2.txt
+      name: NABU.ca
+      options:
+        retronet: true
+        retronetserver: true
+  storage:
+    - path: CCPM
+      options:
+        updatetype: copy
+features:
+  retronet: true
+path: nns-bundle-nabuca.napa
+---
+id: nns-bundle-nabunetworkcom
+name: NabuNetwork.com
+description: |
+  Support for the NabuNetwork.com feed.
+author: NabuNetwork.com
+version: 1.0.1
+manifest:
+  sources:
+    - path: https://www.nabunetwork.com/NabuNetwork.xml
+      name: NabuNetwork.com
+features: {}
+path: nns-bundle-nabunetworkcom.napa
+---
+id: nns-bundle-productiondave-nabugames
+name: Production Dave's Nabu Games
+description: |
+  A collection of games for the Nabu (and Z80 Retro) by Production Dave.
+author: Production Dave
+version: 3.5.2306212011
+url: 'https://github.com/linuxplayground/nabu-games'
+manifest:
+  programs:
+    - name: Invaders
+      path: 'Invaders.nabu'
+    - name: Snake
+      path: 'Snake.nabu'
+    - name: Tetris
+      path: 'Tetris.nabu'
+features: {}
+
+path: nns-bundle-productiondave-nabugames.napa

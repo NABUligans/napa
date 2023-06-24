@@ -1,0 +1,19 @@
+id: nns-bundle-nabuca
+name: NABU.ca
+description: |
+  Support for the NABU.ca feed and files for Cloud CP/M
+author: NABU.ca
+version: 1.0.0
+manifest:
+  sources:
+    - path: https://cloud.nabu.ca/HomeBrew/titles/filesv2.txt
+      name: NABU.ca
+      options:
+        retronet: true
+        retronetserver: true
+  storage:
+    - path: CCPM
+      options:
+        updatetype: copy
+features:
+  retronet: true
