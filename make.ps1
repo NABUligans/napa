@@ -6,6 +6,7 @@ param(
     [switch]$ExcludeNNSBundles
 )
 
+Install-Module -Name powershell-yaml -Force -ErrorAction SilentlyContinue;
 
 if ($Ishkur.IsPresent -or $All.IsPresent)
 { 
@@ -37,12 +38,55 @@ if ($OnlyNNSBundles.IsPresent) {
 
 foreach ($dir in $dirs){
     $outName = "$($dir.Name).napa";
-    $outPath = Join-Path $repo $outName;
-    $manifests += (Get-Content (Join-Path $dir.FullName 'napa.yaml') -Raw) + "`npath: $outName";
+    $jsonPath = Join-Path $dir.FullName 'napa.json';
+    $yamlPath = Join-Path $dir.FullName 'napa.yaml';
+
+    $jsonExists = Test-Path $jsonPath;
+    $yamlExists = Test-Path $yamlPath;
+
+    if (!$jsonExists -and !$yamlExists) {
+        Write-Warning "No manifest found for $($dir.Name)" -ForegroundColor Red;
+        continue;
+    }
+
+    if ($yamlExists) {
+        Write-Warning "Found YAML";
+        $manifest = ConvertFrom-Yaml -Yaml (Get-Content $yamlPath -Raw);
+        
+    } elseif ($jsonExists) {
+        Write-Warning "Found JSON";
+        $manifest = Get-Content $jsonPath -Raw | ConvertFrom-Json -AsHashtable;
+    }
+
+    $manifest['path'] = $outName;
+    Write-Host ($manifest | out-string);
     
+    $manifests += $manifest;
+
+    if ($yamlExists) {
+        Write-Warning "Writing JSON";
+        $manifest | ConvertTo-Json -Depth 100 | Out-File $jsonPath -Force;
+    } elseif ($jsonExists) {
+        Write-Warning "Writing YAML";
+        $manifest | ConvertTo-Yaml | Out-File $yamlPath -Force;
+    }
+
+    $outPath = Join-Path $repo $outName;
     Remove-Item -Path $outPath -Force -ErrorAction SilentlyContinue;
+    Write-Warning "Creating $outName"
     [System.IO.Compression.ZipFile]::CreateFromDirectory($dir.Fullname,$outPath);
+
+    if ($yamlExists) {
+        Write-Warning "Removing JSON";
+        Remove-Item -Path $jsonPath -Force;
+    } elseif ($jsonExists) {
+        Write-Warning "Removing YAML";
+        Remove-Item -Path $yamlPath -Force;
+    }
 }
 
+$yamlManifests = $manifests | ForEach-Object { $_ | ConvertTo-Yaml; }
+
 #Copy-Item -Path './includes/news.yaml' -Destination $repo -Force;
-[string]::Join("`n---`n", $manifests) | Out-File (Join-Path $repo 'repo.yaml') -Force;
+[string]::Join("`n---`n", $yamlManifests) | Out-File (Join-Path $repo 'repo.yaml') -Force;
+ConvertTo-Json $manifests -Depth 100 | Out-File (Join-Path $repo 'repo.json') -Force;

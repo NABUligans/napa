@@ -36,8 +36,8 @@ id: nns-bundle-sample                   # A globally unique identifier for the p
 name: Sample Package                    # The human-readable name of the package
 description: |                          # A description of the package
   A sample package.
-author: Awesome Author                  # The author of the package, shout out to Gavin the creator of Ishkur CPM :)
-version: 0.1.1                          # The version of the package, a number `sort ordeer` higher than the previous version
+author: Awesome Author                  # The author of the packages
+version: 0.1.1                          # The version of the package, a number `sort order` higher than the previous version
 url: https://project/site               # A link to more information
 
 manifest:                               # The manifest lists programs, paks, sources, and storage files
