@@ -25,7 +25,7 @@ description: |
   Ishkur is a flavor of CPM 2.2 made for the NABU from the ground up. System files are loaded via NHACP. 
   This is the 'hybrid' flavor, and supports real drives (C & D) as well as cloud disks (A,B,E,etc).
 id: nns-bundle-ishkurcpm
-version: 0.1.2306251628
+version: 0.1.2306251941
 manifest:
   programs:
   - path: NFS_HYBRID_BOOT.nabu
@@ -82,7 +82,7 @@ description: |
   A collection of games for the Nabu (and Z80 Retro) by Production Dave.
 url: https://github.com/linuxplayground/nabu-games
 id: nns-bundle-productiondave-nabugames
-version: 3.5.2306251628
+version: 3.5.2306251941
 manifest:
   programs:
   - path: Invaders.nabu
