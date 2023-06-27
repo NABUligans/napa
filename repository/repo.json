@@ -1,6 +1,6 @@
 [
   {
-    "features": {},
+    "path": "nns-bundle-classic-nabu-cycles.napa",
     "description": "The classic 1984 NABU Network experience.\nAND Cycle Direct: skip the menu! \n",
     "id": "nns-bundle-classic-nabu-cycles",
     "version": "1.0.1",
@@ -23,7 +23,6 @@
         }
       ]
     },
-    "path": "nns-bundle-classic-nabu-cycles.napa",
     "author": "The NABU Network",
     "name": "Classic NABU Network Cycles"
   },
@@ -33,7 +32,7 @@
     },
     "description": "Ishkur is a flavor of CPM 2.2 made for the NABU from the ground up. System files are loaded via NHACP. \nThis is the 'hybrid' flavor, and supports real drives (C & D) as well as cloud disks (A,B,E,etc).\n",
     "id": "nns-bundle-ishkurcpm",
-    "version": "0.1.2306262121",
+    "version": "0.1.2306271157",
     "manifest": {
       "storage": [
         {
@@ -90,7 +89,7 @@
     "name": "NABU.ca"
   },
   {
-    "features": {},
+    "path": "nns-bundle-nabunetworkcom.napa",
     "description": "Support for the NabuNetwork.com feed.\n",
     "id": "nns-bundle-nabunetworkcom",
     "version": "1.0.2",
@@ -102,33 +101,31 @@
         }
       ]
     },
-    "path": "nns-bundle-nabunetworkcom.napa",
     "author": "NabuNetwork.com",
     "name": "NabuNetwork.com"
   },
   {
-    "features": {},
+    "path": "nns-bundle-productiondave-nabugames.napa",
     "description": "A collection of games for the Nabu (and Z80 Retro) by Production Dave.\n",
     "url": "https://github.com/linuxplayground/nabu-games",
     "id": "nns-bundle-productiondave-nabugames",
-    "version": "3.5.2306262121",
+    "version": "3.5.2306270934",
     "manifest": {
       "programs": [
         {
           "name": "Invaders",
-          "path": "Invaders.nabu"
+          "path": ".nabu"
         },
         {
           "name": "Snake",
-          "path": "Snake.nabu"
+          "path": ".nabu"
         },
         {
           "name": "Tetris",
-          "path": "Tetris.nabu"
+          "path": ".nabu"
         }
       ]
     },
-    "path": "nns-bundle-productiondave-nabugames.napa",
     "author": "Production Dave",
     "name": "Production Dave's Nabu Games"
   }

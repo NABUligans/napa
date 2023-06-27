@@ -18,7 +18,7 @@ As more software becomes available for NABU, it becomes harder for adaptor creat
 
 ```bash
     /package id/                  # A folder with package contents, or bundled into a .napa file
-    |── napa.yaml or napa.json    # NAPA manifest
+    |── napa.yaml or napa.json    # NAPA manifest (bundled packages must contain json)
     ├── /programs/                # NABU programs (.nabu files)
     ├── /storage/                 # storage files   
     ├── /paks/                    # paks (unencrypted, unspooled, .nabu files)
@@ -37,7 +37,9 @@ name: Sample Package                    # The human-readable name of the package
 description: |                          # A description of the package
   A sample package.
 author: Awesome Author                  # The author of the packages
-version: 0.1.1                          # The version of the package, a number `sort order` higher than the previous version
+version: 0.1.1                          # The version of the package, a string `sort order` higher 
+                                        # than the previous version, dates generally work as part of
+                                        # or depending on formatting, the entire version.
 url: https://project/site               # A link to more information
 
 manifest:                               # The manifest lists programs, paks, sources, and storage files

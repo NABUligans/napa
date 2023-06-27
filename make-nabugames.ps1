@@ -31,10 +31,10 @@ $dirs = Get-ChildItem -Path $tmp -Directory;
 $entries = @();
 foreach ($dir in $dirs) {
   Copy-Item -Path (Join-Path $dir.FullName "$($dir.Name.ToUpper()).COM") -Destination $B1 -Force;
-  $name = [cultureinfo]::InvariantCulture.TextInfo.ToTitleCase($dir.Name);
+  $displayName = [cultureinfo]::InvariantCulture.TextInfo.ToTitleCase($dir.Name);
   Copy-Item -Path (Join-Path $dir.FullName '000001.NABU') -Destination (Join-Path $programs "${name}.nabu") -Force;
   #$entries += @{"name" = $name; "path" = "${name}.nabu"};
-  $entries += "    - name: ${name}"
+  $entries += "    - name: ${displayName}"
   $entries += "      path: '${name}.nabu'"
 }
 <#
@@ -61,7 +61,6 @@ url: '$RepoUrl'
 manifest:
   programs:
 $($entries -join "`n")
-features: {}
 "@ | Out-File -Path (Join-Path $PackageId 'napa.yaml') -Force;
 
 Remove-Item $outFile -Force;

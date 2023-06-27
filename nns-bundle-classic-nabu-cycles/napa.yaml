@@ -15,4 +15,3 @@ manifest:
       name: Cycle Direct
       options:
         exploitloader: true
-features: {}

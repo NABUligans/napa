@@ -8,4 +8,3 @@ manifest:
   sources:
     - path: https://www.nabunetwork.com/NabuNetwork.xml
       name: NabuNetwork.com
-features: {}

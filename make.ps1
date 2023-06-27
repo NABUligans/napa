@@ -82,5 +82,8 @@ foreach ($dir in $dirs){
 #$yamlManifests = $manifests | ForEach-Object { $_ | ConvertTo-Yaml; }
 
 #Copy-Item -Path './includes/news.yaml' -Destination $repo -Force;
-#[string]::Join("`n---`n", $yamlManifests) | Out-File (Join-Path $repo 'repo.yaml') -Force;
-ConvertTo-Json $manifests -Depth 100 | Out-File (Join-Path $repo 'repo.json') -Force;
+#[string]::Join("`n---`n", $yamlManifests) `
+#| Out-File (Join-Path $repo 'repo.yaml') -Force;
+
+ConvertTo-Json $manifests -Depth 100 `
+| Out-File (Join-Path $repo 'repo.json') -Force;
