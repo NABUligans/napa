@@ -17,17 +17,17 @@ As more software becomes available for NABU, it becomes harder for adaptor creat
 ## What is a NAPA package?
 
 ```bash
-    /package id/    # A folder with package contents, or bundled into a .napa file
-    |── napa.yaml   # NAPA manifest
-    ├── /programs/  # NABU programs (.nabu files)
-    ├── /storage/   # storage files   
-    ├── /paks/      # paks (unencrypted, unspooled, .nabu files)
-    └── /.../       # other content the adaptor can do something with
+    /package id/                  # A folder with package contents, or bundled into a .napa file
+    |── napa.yaml or napa.json    # NAPA manifest
+    ├── /programs/                # NABU programs (.nabu files)
+    ├── /storage/                 # storage files   
+    ├── /paks/                    # paks (unencrypted, unspooled, .nabu files)
+    └── /.../                     # other content the adaptor can do something with
 ```
 
-A NAPA package is a NAPA file (`.napa`) or a directory with a `napa.yaml` file in it. The `napa.yaml` file contains metadata about the package and the content in the various subdirectories of the package.
+A NAPA package is a NAPA file (`.napa`) or a directory with a `napa.yaml` or `napa.json` file in it: a file containing metadata about the package and the content in the various subdirectories of the package.
 
-### A `napa.yaml` file?
+### So what's in this file?
 
 They look like this:
 
@@ -64,6 +64,8 @@ features:                               # Control adaptor features
   RetroNet: false                       
   NHACPv01: true
 ```
+
+They can be written in yaml or json, but package managers only need to support json. The make scripts in this repository will convert yaml to json for you during packaging.
 
 ## What's in this repo?
 

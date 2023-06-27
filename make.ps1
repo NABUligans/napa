@@ -66,10 +66,7 @@ foreach ($dir in $dirs){
     if ($yamlExists) {
         Write-Warning "Writing JSON";
         $manifest | ConvertTo-Json -Depth 100 | Out-File $jsonPath -Force;
-    } elseif ($jsonExists) {
-        Write-Warning "Writing YAML";
-        $manifest | ConvertTo-Yaml | Out-File $yamlPath -Force;
-    }
+    } 
 
     $outPath = Join-Path $repo $outName;
     Remove-Item -Path $outPath -Force -ErrorAction SilentlyContinue;
@@ -79,14 +76,11 @@ foreach ($dir in $dirs){
     if ($yamlExists) {
         Write-Warning "Removing JSON";
         Remove-Item -Path $jsonPath -Force;
-    } elseif ($jsonExists) {
-        Write-Warning "Removing YAML";
-        Remove-Item -Path $yamlPath -Force;
     }
 }
 
-$yamlManifests = $manifests | ForEach-Object { $_ | ConvertTo-Yaml; }
+#$yamlManifests = $manifests | ForEach-Object { $_ | ConvertTo-Yaml; }
 
 #Copy-Item -Path './includes/news.yaml' -Destination $repo -Force;
-[string]::Join("`n---`n", $yamlManifests) | Out-File (Join-Path $repo 'repo.yaml') -Force;
+#[string]::Join("`n---`n", $yamlManifests) | Out-File (Join-Path $repo 'repo.yaml') -Force;
 ConvertTo-Json $manifests -Depth 100 | Out-File (Join-Path $repo 'repo.json') -Force;

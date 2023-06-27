@@ -4,7 +4,7 @@ description: |
   The classic 1984 NABU Network experience.
   AND Cycle Direct: skip the menu! 
 author: The NABU Network
-version: 1.0.0
+version: 1.0.1
 manifest:
   paks:
     - path: cycle1
