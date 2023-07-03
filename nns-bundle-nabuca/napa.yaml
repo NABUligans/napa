@@ -3,7 +3,7 @@ name: NABU.ca
 description: |
   Support for the NABU.ca feed and files for Cloud CP/M
 author: NABU.ca
-version: 1.0.1
+version: 1.0.2
 manifest:
   sources:
     - path: https://cloud.nabu.ca/HomeBrew/titles/filesv2.txt
@@ -13,6 +13,9 @@ manifest:
         retronetserver: true
   storage:
     - path: CCPM
+      options:
+        updatetype: copy
+    - path: C.dsk
       options:
         updatetype: copy
 features:
