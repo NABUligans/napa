@@ -30,6 +30,7 @@ $programSource = "./IshkurCPM/Output";
 $apps = "./IshkurCPM/Applications/Premade";
 $ptxplay = "./IshkurCPM/Applications/Misc/PtxPlay";
 $msxrom = "./includes/msxrom";
+$blankNDSK = "./includes/ndsk/NDSK_B.IMG";
 
 $ndsk = Join-Path $programSource 'NABU_NDSK';
 $nfs = Join-Path $programSource 'NABU_NFS';
@@ -42,7 +43,7 @@ Get-ChildItem -Path $nfs -Filter "NFS_HYBRID_BOOT.nabu" | Copy-Item -Destination
 Copy-Item -Path (Join-Path $ndsk NDSK_HYBRID_CPM22.SYS) -Destination (Join-Path $storage 'CPM22.SYS') -Force;
 Copy-Item -Path (Join-Path $programSource FONT.GRB) -Destination $storage -Force;
 Copy-Item -Path (Join-Path $ndsk NDSK_DEFAULT.IMG) -Destination (Join-Path $storage 'NDSK_A.IMG') -Force;
-
+Copy-Item -Path $blankNDSK -Destination (Join-Path $storage 'NDSK_B.IMG') -Force;
 #NFS
 Copy-Item -Path (Join-Path $nfs NFS_HYBRID_CPM22.SYS) -Destination (Join-Path $A0 'CPM22.SYS') -Force;
 Copy-Item -Path (Join-Path $programSource FONT.GRB) -Destination $A0 -Force;
@@ -73,6 +74,9 @@ manifest:
       name: Ishkur CPM NDSK
   storage:
     - path: NDSK_A.IMG
+      options:
+        updatetype: copy
+    - path: NDSK_B.IMG
       options:
         updatetype: copy
 features:

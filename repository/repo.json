@@ -1,8 +1,9 @@
 [
   {
-    "version": "1.0.1",
+    "name": "Classic NABU Network Cycles",
     "path": "nns-bundle-classic-nabu-cycles.napa",
-    "id": "nns-bundle-classic-nabu-cycles",
+    "version": "1.0.1",
+    "description": "The classic 1984 NABU Network experience.\nAND Cycle Direct: skip the menu! \n",
     "manifest": {
       "paks": [
         {
@@ -14,26 +15,37 @@
           "path": "cycle2"
         },
         {
+          "name": "Cycle Direct",
           "options": {
             "exploitloader": true
           },
-          "path": "direct",
-          "name": "Cycle Direct"
+          "path": "direct"
         }
       ]
     },
     "author": "The NABU Network",
-    "name": "Classic NABU Network Cycles",
-    "description": "The classic 1984 NABU Network experience.\nAND Cycle Direct: skip the menu! \n"
+    "id": "nns-bundle-classic-nabu-cycles"
   },
   {
-    "version": "0.1.2307062035",
-    "features": {
-      "NHACPv01": true
-    },
+    "name": "Ishkur CPM",
     "path": "nns-bundle-ishkurcpm.napa",
-    "id": "nns-bundle-ishkurcpm",
+    "version": "0.1.2307071702",
+    "description": "Ishkur is a flavor of CPM 2.2 made for the NABU from the ground up. System files are loaded via NHACP. \nThis is the 'hybrid' flavor, and supports real drives (C & D) as well as cloud disks (A,B,E,etc).\n",
     "manifest": {
+      "storage": [
+        {
+          "options": {
+            "updatetype": "copy"
+          },
+          "path": "NDSK_A.IMG"
+        },
+        {
+          "options": {
+            "updatetype": "copy"
+          },
+          "path": "NDSK_B.IMG"
+        }
+      ],
       "programs": [
         {
           "name": "Ishkur CPM NFS",
@@ -43,36 +55,28 @@
           "name": "Ishkur CPM NDSK",
           "path": "NDSK_HYBRID_BOOT.nabu"
         }
-      ],
-      "storage": [
-        {
-          "options": {
-            "updatetype": "copy"
-          },
-          "path": "NDSK_A.IMG"
-        }
       ]
     },
     "author": "teragav17",
-    "name": "Ishkur CPM",
-    "description": "Ishkur is a flavor of CPM 2.2 made for the NABU from the ground up. System files are loaded via NHACP. \nThis is the 'hybrid' flavor, and supports real drives (C & D) as well as cloud disks (A,B,E,etc).\n"
+    "id": "nns-bundle-ishkurcpm",
+    "features": {
+      "NHACPv01": true
+    }
   },
   {
-    "version": "1.0.2",
-    "features": {
-      "retronet": true
-    },
+    "name": "NABU.ca",
     "path": "nns-bundle-nabuca.napa",
-    "id": "nns-bundle-nabuca",
+    "version": "1.0.2",
+    "description": "Support for the NABU.ca feed and files for Cloud CP/M\n",
     "manifest": {
       "sources": [
         {
+          "name": "NABU.ca",
           "options": {
             "retronet": true,
             "retronetserver": true
           },
-          "path": "https://cloud.nabu.ca/HomeBrew/titles/filesv2.txt",
-          "name": "NABU.ca"
+          "path": "https://cloud.nabu.ca/HomeBrew/titles/filesv2.txt"
         }
       ],
       "storage": [
@@ -91,13 +95,16 @@
       ]
     },
     "author": "NABU.ca",
-    "name": "NABU.ca",
-    "description": "Support for the NABU.ca feed and files for Cloud CP/M\n"
+    "id": "nns-bundle-nabuca",
+    "features": {
+      "retronet": true
+    }
   },
   {
-    "version": "1.0.2",
+    "name": "NabuNetwork.com",
     "path": "nns-bundle-nabunetworkcom.napa",
-    "id": "nns-bundle-nabunetworkcom",
+    "version": "1.0.2",
+    "description": "Support for the NabuNetwork.com feed.\n",
     "manifest": {
       "sources": [
         {
@@ -107,14 +114,13 @@
       ]
     },
     "author": "NabuNetwork.com",
-    "name": "NabuNetwork.com",
-    "description": "Support for the NabuNetwork.com feed.\n"
+    "id": "nns-bundle-nabunetworkcom"
   },
   {
-    "version": "3.5.2307062035",
-    "url": "https://github.com/linuxplayground/nabu-games",
+    "name": "Production Dave's Nabu Games",
     "path": "nns-bundle-productiondave-nabugames.napa",
-    "id": "nns-bundle-productiondave-nabugames",
+    "version": "3.5.2307062046",
+    "description": "A collection of games for the Nabu (and Z80 Retro) by Production Dave.\n",
     "manifest": {
       "programs": [
         {
@@ -132,7 +138,7 @@
       ]
     },
     "author": "Production Dave",
-    "name": "Production Dave's Nabu Games",
-    "description": "A collection of games for the Nabu (and Z80 Retro) by Production Dave.\n"
+    "id": "nns-bundle-productiondave-nabugames",
+    "url": "https://github.com/linuxplayground/nabu-games"
   }
 ]
