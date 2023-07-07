@@ -29,7 +29,7 @@
   {
     "name": "Ishkur CPM",
     "path": "nns-bundle-ishkurcpm.napa",
-    "version": "0.1.2307071828",
+    "version": "0.1.2307071833",
     "description": "Ishkur is a flavor of CPM 2.2 made for the NABU from the ground up. System files are loaded via NHACP. \nThis is the 'hybrid' flavor, and supports real drives (C & D) as well as cloud disks (A,B,E,etc).\n",
     "manifest": {
       "storage": [
@@ -119,7 +119,7 @@
   {
     "name": "Production Dave's Nabu Games",
     "path": "nns-bundle-productiondave-nabugames.napa",
-    "version": "3.5.2307062046",
+    "version": "3.5.2307071833",
     "description": "A collection of games for the Nabu (and Z80 Retro) by Production Dave.\n",
     "manifest": {
       "programs": [
