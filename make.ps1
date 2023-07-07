@@ -1,6 +1,5 @@
 param(
-    [switch]$Ishkur,
-    [switch]$NabuGames,
+    [string[]]$Include,
     [switch]$All,
     [switch]$OnlyNNSBundles,
     [switch]$ExcludeNNSBundles
@@ -8,14 +7,23 @@ param(
 
 Install-Module -Name powershell-yaml -Force -ErrorAction SilentlyContinue;
 
-if ($Ishkur.IsPresent -or $All.IsPresent)
-{ 
-    .\make-ishkur.ps1;
+function Include([string]$name) {
+    foreach ($inc in $Include) {
+        if ($inc -eq $name) {
+            return $true;
+        }
+    }
+    return $false;
 }
 
-if ($NabuGames.IsPresent -or $All.IsPresent)
-{ 
-    .\make-nabugames.ps1;
+$makeFiles = Get-ChildItem -Path . -Filter "make-*.ps1" -File;
+foreach ($file in $makeFiles) {
+    $name = $file.BaseName.Replace("make-", "").Replace(".ps1", "");
+    if ($All.IsPresent -or (Include $name)) {
+        Write-Warning "Make: $name";
+        &"$file";
+    }
+    
 }
 
 $repo = Join-Path $PWD 'repository';
@@ -69,7 +77,7 @@ foreach ($dir in $dirs){
     } 
 
     $outPath = Join-Path $repo $outName;
-    Remove-Item -Path $outPath -Force -ErrorAction SilentlyContinue;
+    Remove-Item -Path $outPath -Force -ErrorAction Continue;
     Write-Warning "Creating $outName"
     [System.IO.Compression.ZipFile]::CreateFromDirectory($dir.Fullname,$outPath);
 
