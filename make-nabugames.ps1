@@ -32,6 +32,7 @@ $entries = @();
 foreach ($dir in $dirs) {
   Copy-Item -Path (Join-Path $dir.FullName "$($dir.Name.ToUpper()).COM") -Destination $B1 -Force;
   $displayName = [cultureinfo]::InvariantCulture.TextInfo.ToTitleCase($dir.Name);
+  $name = $dir.Name;
   Copy-Item -Path (Join-Path $dir.FullName '000001.NABU') -Destination (Join-Path $programs "${name}.nabu") -Force;
   #$entries += @{"name" = $name; "path" = "${name}.nabu"};
   $entries += "    - name: ${displayName}"
