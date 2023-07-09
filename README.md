@@ -67,7 +67,7 @@ features:                               # Control adaptor features
   NHACPv01: true
 ```
 
-They can be written in yaml or json, but package managers only need to support json. The make scripts in this repository will convert yaml to json for you during packaging.
+They final manifest must be JSON. The make scripts in this repository will convert yaml to json for you during packaging if you choose to author in yaml.
 
 ## What's in this repo?
 

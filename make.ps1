@@ -5,6 +5,16 @@ param(
     [switch]$ExcludeNNSBundles
 )
 
+$ErrorActionPreference = 'Stop'
+
+$reservedFolderNames = @(
+    'includes',
+    'repository',
+    'scripts'
+)
+
+$nnsFilter = "nns-bundle-*";
+
 Install-Module -Name powershell-yaml -Force -ErrorAction SilentlyContinue;
 
 function Include([string]$name) {
@@ -16,14 +26,19 @@ function Include([string]$name) {
     return $false;
 }
 
-$makeFiles = Get-ChildItem -Path . -Filter "make-*.ps1" -File;
+function Pull([string]$name, [string]$packageId, [hashtable]$arguments = @{}) {
+    $pullScript = Get-ChildItem -Path ./scripts/pull -Filter "$name.ps1" -File;
+    Write-Warning "Pull: $name";
+    &"$pullScript" $packageId @arguments;
+}
+
+$makeFiles = Get-ChildItem -Path ./scripts/make -Filter "*.ps1" -File;
 foreach ($file in $makeFiles) {
-    $name = $file.BaseName.Replace("make-", "").Replace(".ps1", "");
+    $name = $file.BaseName;
     if ($All.IsPresent -or (Include $name)) {
         Write-Warning "Make: $name";
         &"$file";
     }
-    
 }
 
 $repo = Join-Path $PWD 'repository';
@@ -33,14 +48,12 @@ if (!(Test-Path $repo)){
 $manifests = @();
 
 if ($OnlyNNSBundles.IsPresent) {
-    $dirs = get-childitem . -Filter "nns-bundle-*" -Directory
+    $dirs = get-childitem . -Filter $nnsFilter -Directory
 } else {
-    $dirs = get-childitem . -Directory `
-            | Where-Object Name -ne 'includes' `
-            | Where-Object Name -ne 'repository';
+    $dirs = get-childitem . -Directory | Where-Object Name -notin $reservedFolderNames;
 
     if ($ExcludeNNSBundles.IsPresent) {
-        $dirs | Where-Object Name -notlike "nns-bundle-*"
+        $dirs | Where-Object Name -notlike $nnsFilter
     }
 }
 
@@ -86,12 +99,6 @@ foreach ($dir in $dirs){
         Remove-Item -Path $jsonPath -Force;
     }
 }
-
-#$yamlManifests = $manifests | ForEach-Object { $_ | ConvertTo-Yaml; }
-
-#Copy-Item -Path './includes/news.yaml' -Destination $repo -Force;
-#[string]::Join("`n---`n", $yamlManifests) `
-#| Out-File (Join-Path $repo 'repo.yaml') -Force;
 
 ConvertTo-Json $manifests -Depth 100 `
 | Out-File (Join-Path $repo 'repo.json') -Force;
