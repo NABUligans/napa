@@ -27,6 +27,7 @@
     "version": "1.0.1"
   },
   {
+    "url": "https://github.com/tergav17/IshkurCPM",
     "name": "Ishkur CPM",
     "path": "nns-bundle-ishkurcpm.napa",
     "description": "Ishkur is a flavor of CPM 2.2 made for the NABU from the ground up. System files are loaded via NHACP. \nThis is the 'hybrid' flavor, and supports real drives (C & D) as well as cloud disks (A,B,E,etc).\n",
@@ -62,16 +63,18 @@
       ]
     },
     "author": "teragav17",
-    "version": "0.1.2307101733",
+    "version": "0.1.2307101751",
     "features": {
       "NHACPv01": true
     }
   },
   {
+    "url": "https://www.nabu.ca",
     "name": "NABU.ca",
+    "features": {
+      "retronet": true
+    },
     "path": "nns-bundle-nabuca.napa",
-    "description": "Support for the NABU.ca feed and files for Cloud CP/M\n",
-    "id": "nns-bundle-nabuca",
     "manifest": {
       "storage": [
         {
@@ -98,17 +101,16 @@
         }
       ]
     },
+    "id": "nns-bundle-nabuca",
     "author": "NABU.ca",
-    "version": "1.0.2",
-    "features": {
-      "retronet": true
-    }
+    "description": "Support for the NABU.ca feed and files for Cloud CP/M\n",
+    "version": "1.0.3"
   },
   {
     "url": "https://github.com/TechCowboy/NABU-FUN",
     "name": "Tech Cowboy's NABU-FUN",
     "path": "nns-bundle-nabufun.napa",
-    "description": "Reversi - A RETRONET/FujuNet Network Game\n",
+    "description": "Some fine \nIncludes Reversi - A RETRONET/FujuNet Network Game!\n",
     "id": "nns-bundle-nabufun",
     "manifest": {
       "programs": [
@@ -122,10 +124,9 @@
     "version": "1.0.0"
   },
   {
+    "url": "https://nabunetwork.com",
     "name": "NabuNetwork.com",
     "path": "nns-bundle-nabunetworkcom.napa",
-    "description": "Support for the NabuNetwork.com feed.\n",
-    "id": "nns-bundle-nabunetworkcom",
     "manifest": {
       "sources": [
         {
@@ -134,8 +135,10 @@
         }
       ]
     },
+    "id": "nns-bundle-nabunetworkcom",
     "author": "NabuNetwork.com",
-    "version": "1.0.2"
+    "description": "Support for the NabuNetwork.com feed.\n",
+    "version": "1.0.3"
   },
   {
     "url": "https://github.com/linuxplayground/nabu-games",

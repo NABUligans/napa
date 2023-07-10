@@ -16,6 +16,7 @@ description: |
   This is the 'hybrid' flavor, and supports real drives (C & D) as well as cloud disks (A,B,E,etc).
 author: teragav17
 version: $Version
+url: 'https://github.com/tergav17/IshkurCPM'
 manifest:
   programs:
     - path: NFS_HYBRID_BOOT.nabu
