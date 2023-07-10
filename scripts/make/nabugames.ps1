@@ -5,9 +5,8 @@ param(
 )
 
 
-$MinorVersion = (Get-Date).ToString("yyMMddHHmm");
+$MinorVersion = 3;
 $entries = Pull 'nabugames' $PackageId @{Version=$Version;RepoUrl=$RepoUrl};
-
 $Version = "$Version.$MinorVersion";
 
 @"

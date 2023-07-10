@@ -13,9 +13,15 @@ $reservedFolderNames = @(
     'scripts'
 )
 
+
 $nnsFilter = "nns-bundle-*";
+$includes = Join-Path $PWD 'includes';
 
 Install-Module -Name powershell-yaml -Force -ErrorAction SilentlyContinue;
+
+$z88dk = (Join-Path $includes 'z88dk');
+
+
 
 function Include([string]$name) {
     foreach ($inc in $Include) {
@@ -26,11 +32,17 @@ function Include([string]$name) {
     return $false;
 }
 
+function SetEnvironment([string]$name, [string]$value) {
+    [System.Environment]::SetEnvironmentVariable($name, $value, 'Process');
+}
+
 function Pull([string]$name, [string]$packageId, [hashtable]$arguments = @{}) {
     $pullScript = Get-ChildItem -Path ./scripts/pull -Filter "$name.ps1" -File;
     Write-Warning "Pull: $name";
     &"$pullScript" $packageId @arguments;
 }
+
+
 
 $makeFiles = Get-ChildItem -Path ./scripts/make -Filter "*.ps1" -File;
 foreach ($file in $makeFiles) {
@@ -90,7 +102,9 @@ foreach ($dir in $dirs){
     } 
 
     $outPath = Join-Path $repo $outName;
-    Remove-Item -Path $outPath -Force -ErrorAction Continue;
+    if ((Test-Path $outPath)) {
+        Remove-Item -Path $outPath -Force -ErrorAction Continue;
+    }
     Write-Warning "Creating $outName"
     [System.IO.Compression.ZipFile]::CreateFromDirectory($dir.Fullname,$outPath);
 
@@ -102,3 +116,7 @@ foreach ($dir in $dirs){
 
 ConvertTo-Json $manifests -Depth 100 `
 | Out-File (Join-Path $repo 'repo.json') -Force;
+
+#if ((Test-Path $z88dk)) {
+#   Remove-Item -Path $z88dk -Force -Recurse;
+#|

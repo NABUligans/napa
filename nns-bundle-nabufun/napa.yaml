@@ -1,0 +1,11 @@
+id: nns-bundle-nabufun
+name: Tech Cowboy's NABU-FUN
+description: |
+  Reversi - A RETRONET/FujuNet Network Game
+author: Tech Cowboy
+version: 1.0.0
+url: 'https://github.com/TechCowboy/NABU-FUN'
+manifest:
+  programs:
+    - name: Reversi
+      path: 'reversi.nabu'
