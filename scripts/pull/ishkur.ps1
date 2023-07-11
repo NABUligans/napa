@@ -8,7 +8,20 @@ param (
 
 $includes = Join-Path $PWD 'includes'
 $outPath = Join-Path $includes 'IshkurCPM'
-git clone 'https://github.com/tergav17/IshkurCPM.git' $outPath;
+
+CloneOrPull 'https://github.com/tergav17/IshkurCPM.git' $outPath;
+
+<#
+if ((Test-Path $outPath)) {
+    git clone  $outPath;
+} else {
+    $returnTo = $PWD;
+    Set-Location $outPath;
+    git pull;
+    Set-Location $returnTo;
+}
+#>
+
 $storage = Join-Path $PackageId storage
 $programs = Join-Path $PackageId programs
 if((Test-Path $PackageId)) {
@@ -57,6 +70,7 @@ Copy-Item -Path (Join-Path $diskContent *) -Destination $A0 -Force;
 #IDE
 Copy-Item -Path $idegen -Destination (Join-Path $A0 'idegen.com') -Force;
 
+#MSXROM
 Copy-Item -Path (Join-Path $msxrom *) -Destination $M0 -Force;
 Expand-Archive (join-path $M0 'samples.wad') -DestinationPath $M0 -Force;
 Remove-Item (join-path $M0 'samples.wad');
@@ -66,4 +80,4 @@ Move-Item -Path (Join-Path $tmp 'CPMSoftware_Updated' '*') -Destination $storage
 
 Copy-Item -Path (Join-Path $ptxplay 'ptxplay.com') -Destination (Join-Path $B0 'ptxplay.com') -Force;
 
-Remove-Item $outPath -Force -Recurse;
+CleanUp $outpath;

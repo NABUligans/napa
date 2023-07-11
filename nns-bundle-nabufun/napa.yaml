@@ -9,4 +9,8 @@ url: 'https://github.com/TechCowboy/NABU-FUN'
 manifest:
   programs:
     - name: Reversi
-      path: 'reversi.nabu'
+      path: 'REVERSI.nabu'
+features:
+  retronet: true
+options:
+  serverport: 6502

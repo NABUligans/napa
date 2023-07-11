@@ -71,4 +71,9 @@ They final manifest must be JSON. The make scripts in this repository will conve
 
 ## What's in this repo?
 
-This repo contains the Benevolent Societies package repository, tools to create the packages in that repo, and the repository list itself. This is the default repository used by NABU NetSim.
+This repo contains the Benevolent Societies package repository, the default repository used by NABU NetSim.
+And all the tools to create the packages in that repo, and the repository list itself.
+
+### What do you need to build the repo?
+
+- PowerShell 7+

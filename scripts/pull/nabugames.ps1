@@ -46,8 +46,7 @@ foreach ($dir in $dirs) {
     $entries += "      path: '${name}.nabu'"
 }
 
-Remove-Item $outFile -Force;
-Remove-Item $tmp -Recurse -Force;
-
+CleanUp $outFile;
+CleanUp $tmp;
 
 return $entries;

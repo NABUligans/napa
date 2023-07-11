@@ -16,5 +16,5 @@ Remove-Item $z88dkZip -Force;
 
 #$env:PATH = "$z88dk\bin;$env:PATH";
 #$env:ZCCCFG = "$z88dk\lib\config";
-#SetEnvironment PATH "$z88dk\bin;$env:PATH";
-#SetEnvironment ZCCCFG "$z88dk\lib\config";
+SetEnvironment PATH "$z88dk\bin;$env:PATH";
+SetEnvironment ZCCCFG "$z88dk\lib\config";
