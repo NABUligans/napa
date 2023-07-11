@@ -4,6 +4,6 @@
     )
     Exclude=@()
     Delist=@(
-        'nns-bundle-nabufun'
+        #'nns-bundle-nabufun'
     )
 }

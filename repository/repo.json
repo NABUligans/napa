@@ -36,7 +36,7 @@
     "description": "Ishkur is a flavor of CPM 2.2 made for the NABU from the ground up. System files are loaded via NHACP. \nThis is the 'hybrid' flavor, and supports real drives (C & D) as well as cloud disks (A,B,E,etc).\n",
     "id": "nns-bundle-ishkurcpm",
     "path": "nns-bundle-ishkurcpm.napa",
-    "version": "0.1.2307110856",
+    "version": "0.1.2307111052",
     "manifest": {
       "programs": [
         {
@@ -102,6 +102,29 @@
             "updatetype": "copy"
           },
           "path": "C.dsk"
+        }
+      ]
+    }
+  },
+  {
+    "features": {
+      "retronet": true
+    },
+    "author": "Tech Cowboy",
+    "url": "https://github.com/TechCowboy/NABU-FUN",
+    "name": "Tech Cowboy's NABU-FUN",
+    "path": "nns-bundle-nabufun.napa",
+    "description": "Some fine \nIncludes Reversi - A RETRONET/FujuNet Network Game!\n",
+    "id": "nns-bundle-nabufun",
+    "options": {
+      "serverport": 6502
+    },
+    "version": "1.0.0",
+    "manifest": {
+      "programs": [
+        {
+          "path": "REVERSI.nabu",
+          "name": "Reversi"
         }
       ]
     }
