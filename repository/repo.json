@@ -36,7 +36,7 @@
     "description": "Ishkur is a flavor of CPM 2.2 made for the NABU from the ground up. System files are loaded via NHACP. \nThis is the 'hybrid' flavor, and supports real drives (C & D) as well as cloud disks (A,B,E,etc).\n",
     "id": "nns-bundle-ishkurcpm",
     "path": "nns-bundle-ishkurcpm.napa",
-    "version": "0.1.2307111052",
+    "version": "0.1.2307121319",
     "manifest": {
       "programs": [
         {
@@ -108,7 +108,8 @@
   },
   {
     "features": {
-      "retronet": true
+      "retronet": true,
+      "retronetserver": true
     },
     "author": "Tech Cowboy",
     "url": "https://github.com/TechCowboy/NABU-FUN",

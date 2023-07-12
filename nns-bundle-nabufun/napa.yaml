@@ -12,5 +12,6 @@ manifest:
       path: 'REVERSI.nabu'
 features:
   retronet: true
+  retronetserver: true
 options:
   serverport: 6502
