@@ -4,10 +4,10 @@ description: |
   Support for the NabuNetwork.com feed.
 author: NabuNetwork.com
 url: https://nabunetwork.com
-version: 1.0.4
+version: 1.0.4.2
 manifest:
   paks:
-    - path: 000001.NABU
+    - path: BOOTMENU.NABU
       name: NabuNetwork.com Headless
   sources:
     - path: https://www.nabunetwork.com/NabuNetwork.xml
