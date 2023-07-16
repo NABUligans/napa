@@ -116,8 +116,8 @@
     "manifest": {
       "paks": [
         {
-          "name": "Adaptor Boot Menu by NabuNetwork.com",
-          "path": "BOOTMENU.nabu"
+          "name": "NabuNetwork.com Headless",
+          "path": "000001.NABU"
         }
       ],
       "sources": [
