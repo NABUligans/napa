@@ -1,3 +1,4 @@
+[cmdletbinding()]
 param(
     [string[]]$Include,
     [string[]]$Exclude,
@@ -7,7 +8,7 @@ param(
 )
 
 $ErrorActionPreference = 'Stop'
-
+$seperator = [System.IO.Path]::PathSeparator;
 $reservedFolderNames = @(
     'includes',
     'repository',
@@ -46,8 +47,24 @@ function Exclude([string]$name){
     return (In $Exclude $name);
 }
 
+function AddPath([string]$path) {
+    $newPath = "${path}${seperator}$env:PATH";
+    SetEnvironment PATH $newPath;
+}
+
+
+function RemovePath([string]$path) {
+    $newPath = "$env:PATH".Replace(
+            $path, [string]::Empty
+        ).Replace(
+            "${seperator}${seperator}", 
+            $seperator
+        );
+    SetEnvironment PATH $newPath;
+}
+
 function SetEnvironment([string]$name, [string]$value) {
-    [System.Environment]::SetEnvironmentVariable($name, $value, 'Process');
+    [System.Environment]::SetEnvironmentVariable($name, $value);
 }
 
 function Pull([string]$name, [string]$packageId, [hashtable]$arguments = @{}) {
@@ -70,9 +87,9 @@ function CleanUp([string[]] $paths) {
 
 function InFolder([string]$path, [scriptblock]$action){
     $returnTo = $PWD;
-        Set-Location $path;
-        &$action;
-        Set-Location $returnTo;
+    Set-Location $path;
+    &$action;
+    Set-Location $returnTo;
 }
 
 function CloneOrPull([string]$url, [string]$path){

@@ -1,3 +1,5 @@
+
+
 function Install-NAPAPackage {
     [cmdletbinding()]
     param(
@@ -14,3 +16,7 @@ function Install-NAPAPackage {
     New-Item -Path $destination -ItemType Directory -Force;
     Extract-Archive -Path $Package -DestinationPath $destination;
 }
+
+Export-ModuleMember -Cmdlet @(
+    'Install-NAPAPackage'
+)

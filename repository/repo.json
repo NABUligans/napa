@@ -1,11 +1,10 @@
 [
   {
+    "id": "nns-bundle-classic-nabu-cycles",
     "author": "The NABU Network",
+    "version": "1.0.1",
     "name": "Classic NABU Network Cycles",
     "description": "The classic 1984 NABU Network experience.\nAND Cycle Direct: skip the menu! \n",
-    "id": "nns-bundle-classic-nabu-cycles",
-    "path": "nns-bundle-classic-nabu-cycles.napa",
-    "version": "1.0.1",
     "manifest": {
       "paks": [
         {
@@ -18,26 +17,37 @@
         },
         {
           "name": "Cycle Direct",
-          "path": "direct",
           "options": {
             "exploitloader": true
-          }
+          },
+          "path": "direct"
         }
       ]
-    }
+    },
+    "path": "nns-bundle-classic-nabu-cycles.napa"
   },
   {
-    "features": {
-      "NHACPv01": true
-    },
+    "id": "nns-bundle-ishkurcpm",
     "author": "teragav17",
     "url": "https://github.com/tergav17/IshkurCPM",
+    "version": "0.1.2307152059",
     "name": "Ishkur CPM",
     "description": "Ishkur is a flavor of CPM 2.2 made for the NABU from the ground up. System files are loaded via NHACP. \nThis is the 'hybrid' flavor, and supports real drives (C & D) as well as cloud disks (A,B,E,etc).\n",
-    "id": "nns-bundle-ishkurcpm",
-    "path": "nns-bundle-ishkurcpm.napa",
-    "version": "0.1.2307121319",
     "manifest": {
+      "storage": [
+        {
+          "path": "NDSK_A.IMG",
+          "options": {
+            "updatetype": "copy"
+          }
+        },
+        {
+          "path": "NDSK_B.IMG",
+          "options": {
+            "updatetype": "copy"
+          }
+        }
+      ],
       "programs": [
         {
           "name": "Ishkur CPM NFS",
@@ -51,125 +61,97 @@
           "name": "Ishkur CPM IDE (Experimental)",
           "path": "IDE_BOOT.nabu"
         }
-      ],
-      "storage": [
-        {
-          "options": {
-            "updatetype": "copy"
-          },
-          "path": "NDSK_A.IMG"
-        },
-        {
-          "options": {
-            "updatetype": "copy"
-          },
-          "path": "NDSK_B.IMG"
-        }
       ]
-    }
+    },
+    "features": {
+      "NHACPv01": true
+    },
+    "path": "nns-bundle-ishkurcpm.napa"
   },
   {
-    "features": {
-      "retronet": true
-    },
+    "id": "nns-bundle-nabuca",
     "author": "NABU.ca",
     "url": "https://www.nabu.ca",
+    "version": "1.0.3",
     "name": "NABU.ca",
     "description": "Support for the NABU.ca feed and files for Cloud CP/M\n",
-    "id": "nns-bundle-nabuca",
-    "path": "nns-bundle-nabuca.napa",
-    "version": "1.0.3",
     "manifest": {
-      "sources": [
+      "storage": [
         {
-          "name": "NABU.ca",
-          "path": "https://cloud.nabu.ca/HomeBrew/titles/filesv2.txt",
+          "path": "CCPM",
           "options": {
-            "retronet": true,
-            "retronetserver": true
+            "updatetype": "copy"
+          }
+        },
+        {
+          "path": "C.dsk",
+          "options": {
+            "updatetype": "copy"
           }
         }
       ],
-      "storage": [
+      "sources": [
         {
+          "name": "NABU.ca",
           "options": {
-            "updatetype": "copy"
+            "retronet": true,
+            "retronetserver": true
           },
-          "path": "CCPM"
-        },
-        {
-          "options": {
-            "updatetype": "copy"
-          },
-          "path": "C.dsk"
+          "path": "https://cloud.nabu.ca/HomeBrew/titles/filesv2.txt"
         }
       ]
-    }
-  },
-  {
+    },
     "features": {
-      "retronet": true,
-      "retronetserver": true
+      "retronet": true
     },
-    "author": "Tech Cowboy",
-    "url": "https://github.com/TechCowboy/NABU-FUN",
-    "name": "Tech Cowboy's NABU-FUN",
-    "path": "nns-bundle-nabufun.napa",
-    "description": "Some fine \nIncludes Reversi - A RETRONET/FujuNet Network Game!\n",
-    "id": "nns-bundle-nabufun",
-    "options": {
-      "serverport": 6502
-    },
-    "version": "1.0.0",
-    "manifest": {
-      "programs": [
-        {
-          "path": "REVERSI.nabu",
-          "name": "Reversi"
-        }
-      ]
-    }
+    "path": "nns-bundle-nabuca.napa"
   },
   {
+    "id": "nns-bundle-nabunetworkcom",
     "author": "NabuNetwork.com",
     "url": "https://nabunetwork.com",
+    "version": "1.0.4",
     "name": "NabuNetwork.com",
     "description": "Support for the NabuNetwork.com feed.\n",
-    "id": "nns-bundle-nabunetworkcom",
-    "path": "nns-bundle-nabunetworkcom.napa",
-    "version": "1.0.3",
     "manifest": {
+      "paks": [
+        {
+          "name": "Adaptor Boot Menu by NabuNetwork.com",
+          "path": "BOOTMENU.nabu"
+        }
+      ],
       "sources": [
         {
           "name": "NabuNetwork.com",
           "path": "https://www.nabunetwork.com/NabuNetwork.xml"
         }
       ]
-    }
+    },
+    "path": "nns-bundle-nabunetworkcom.napa"
   },
   {
+    "id": "nns-bundle-productiondave-nabugames",
     "author": "Production Dave",
     "url": "https://github.com/linuxplayground/nabu-games",
+    "version": "3.5.3",
     "name": "Production Dave's Nabu Games",
     "description": "A collection of games for the Nabu (and Z80 Retro) by Production Dave.\n",
-    "id": "nns-bundle-productiondave-nabugames",
-    "path": "nns-bundle-productiondave-nabugames.napa",
-    "version": "3.5.3",
     "manifest": {
       "programs": [
         {
-          "path": "invaders.nabu",
-          "name": "Invaders"
+          "name": "Invaders",
+          "path": "invaders.nabu"
         },
         {
-          "path": "snake.nabu",
-          "name": "Snake"
+          "name": "Snake",
+          "path": "snake.nabu"
         },
         {
-          "path": "tetris.nabu",
-          "name": "Tetris"
+          "name": "Tetris",
+          "path": "tetris.nabu"
         }
       ]
-    }
+    },
+    "path": "nns-bundle-productiondave-nabugames.napa"
   }
 ]

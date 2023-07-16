@@ -4,8 +4,11 @@ description: |
   Support for the NabuNetwork.com feed.
 author: NabuNetwork.com
 url: https://nabunetwork.com
-version: 1.0.3
+version: 1.0.4
 manifest:
+  paks:
+    - path: BOOTMENU.nabu
+      name: Adaptor Boot Menu by NabuNetwork.com
   sources:
     - path: https://www.nabunetwork.com/NabuNetwork.xml
       name: NabuNetwork.com

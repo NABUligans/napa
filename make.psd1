@@ -1,9 +1,9 @@
 @{
     Include=@(
-        'ishkur'
+        #'ishkur'
     )
     Exclude=@()
     Delist=@(
-        #'nns-bundle-nabufun'
+        'nns-bundle-nabufun'
     )
 }
