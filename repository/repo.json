@@ -110,7 +110,7 @@
     "id": "nns-bundle-nabunetworkcom",
     "author": "NabuNetwork.com",
     "url": "https://nabunetwork.com",
-    "version": "1.0.4.2",
+    "version": "1.0.4.3",
     "name": "NabuNetwork.com",
     "description": "Support for the NabuNetwork.com feed.\n",
     "manifest": {
