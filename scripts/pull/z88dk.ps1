@@ -16,8 +16,7 @@ switch ([System.Runtime.InteropServices.RuntimeInformation]::OSDescription) {
     }
     default {
         $OS = 'win32'
-    }
-}
+    }}
 if ($null -ne $OS) {
     if ($Version -eq 'latest') {
         $z88dkUrl = 'http://nightly.z88dk.org/z88dk-$OS-latest.zip'
@@ -31,7 +30,7 @@ if ($null -ne $OS) {
 
 Invoke-WebRequest -Uri $z88dkUrl -OutFile $z88dkZip;
 Expand-Archive -Path $z88dkZip -DestinationPath $includes;
-Remove-Item $z88dkZip -Force;
+CleanUp $z88dkZip;
 
 #$env:PATH = "$z88dk\bin;$env:PATH";
 #$env:ZCCCFG = "$z88dk\lib\config";
