@@ -1,25 +1,40 @@
 [cmdletbinding()]
 param(
+    
     [string[]]$Include,
     [string[]]$Exclude,
     [string[]]$Delist,
+    [string]$Label,
     [switch]$All,
     [switch]$Clean
 )
 
+$root = $PWD;
 $ErrorActionPreference = 'Stop'
 $seperator = [System.IO.Path]::PathSeparator;
 $reservedFolderNames = @(
     'includes',
     'repository',
-    'scripts'
+    'scripts',
+    'temp'
 )
 
-$makefile = Import-PowerShellDataFile -Path make.psd1 -ErrorAction Continue;
+$NotNull = { $null -ne $_ }
 
-$Include = @($Include) + @($makefile.Include);
-$Exclude = @($Exclude) + @($makefile.Exclude);
-$Delist = @($Delist) + @($makefile.Delist);
+$makefile = Import-PowerShellDataFile -Path make.psd1 -ErrorAction Continue;
+$Label = [string]::IsNullOrWhiteSpace($Label) ? $makefile.Label : $Label;
+$Include = @($Include) + @($makefile.Include) | Where-Object $NotNull;
+$Exclude = @($Exclude) + @($makefile.Exclude) | Where-Object $NotNull;
+$Delist = @($Delist) + @($makefile.Delist) | Where-Object $NotNull;
+
+Write-Warning "Label: $Label";
+Write-Warning "Include: $($Include -join ',')"
+Write-Warning "Exclude: $($Exclude -join ',')"
+Write-Warning "Delist: $($Delist -join ',')"
+Write-Warning "All: $($All.IsPresent)"
+Write-Warning "Clean: $($Clean.IsPresent)"
+
+Pause;
 
 $includes = Join-Path $PWD 'includes';
 
@@ -28,6 +43,9 @@ Install-Module -Name powershell-yaml -Force -ErrorAction SilentlyContinue;
 $z88dk = (Join-Path $includes 'z88dk');
 
 <# GLOBAL FUNCTIONS #>
+
+$makeScriptPath = Join-Path $PWD 'scripts' 'make';
+$pullScriptPath = Join-Path $PWD 'scripts' 'pull';
 
 function In([array]$list, [string]$name){
     $should = $false;
@@ -68,9 +86,15 @@ function SetEnvironment([string]$name, [string]$value) {
 }
 
 function Pull([string]$name, [string]$packageId, [hashtable]$arguments = @{}) {
-    $pullScript = Get-ChildItem -Path ./scripts/pull -Filter "$name.ps1" -File;
+    $pullScript = Get-ChildItem -Path $pullScriptPath -Filter "$name.ps1" -File;
     Write-Warning "Pull: $name";
     &"$pullScript" $packageId @arguments;
+}
+
+function Make([string]$name, [hashtable]$arguments = @{}) {
+    $makeFile = Get-ChildItem -Path $makeScriptPath -Filter "${name}.ps1" -File;
+    Write-Warning "Make: $name";
+    &"$makeFile" @arguments;
 }
 
 function CleanUp([string[]] $paths) {
@@ -104,20 +128,23 @@ function CloneOrPull([string]$url, [string]$path){
 
 <# MAKE Scripts #>
 
-$makeFiles = Get-ChildItem -Path ./scripts/make -Filter "*.ps1" -File;
+
+
+$makeFiles = Get-ChildItem -Path $makeScriptPath -Filter "*.ps1" -File | ForEach-Object { $_.BaseName };
 foreach ($file in $makeFiles) {
-    $name = $file.BaseName;
-    if (-not (Exclude $name) -and ($All.IsPresent -or (Include $name))){
-        Write-Warning "Make: $name";
-        &"$file";
-    }
+    #$name = $file.BaseName;
+    #if (-not (Exclude $name) -and ($All.IsPresent -or (Include $name))){
+    #    Write-Warning "Make: $name";
+    #    &"$file";
+    #}
+    Make $file;
 }
 
 <# Packaging #>
 
-$repo = Join-Path $PWD 'repository';
+$repo = Join-Path $PWD 'repository' $Label;
 if (!(Test-Path $repo)){
-    New-Item -Path $repo -ItemType Directory;
+    New-Item -Path $repo -ItemType Directory | Out-Null;
 }
 
 $manifests = @();
@@ -141,7 +168,7 @@ foreach ($dir in $dirs){
     $yamlExists = Test-Path $yamlPath;
 
     if (!$jsonExists -and !$yamlExists) {
-        Write-Warning " - No manifest found for $($name)" -ForegroundColor Red;
+        Write-Warning " - No manifest found for $($name)";
         continue;
     }
 
