@@ -34,8 +34,6 @@ Write-Warning "Delist: $($Delist -join ',')"
 Write-Warning "All: $($All.IsPresent)"
 Write-Warning "Clean: $($Clean.IsPresent)"
 
-Pause;
-
 $includes = Join-Path $PWD 'includes';
 
 Install-Module -Name powershell-yaml -Force -ErrorAction SilentlyContinue;

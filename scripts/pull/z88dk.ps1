@@ -49,8 +49,10 @@ if ($OS -ne 'linux') {
 
     if ($linuxDetails.Contains('ubuntu')) {
         InFolder $z88dk {
-            sh "$(Join-Path $makeScriptPath 'z88dk' 'ubuntu.sh')";
+            sh "$(Join-Path $makeScriptPath 'z88dk-ubuntu.sh')";
         };
+        AddPath "/usr/local/share/z88dk/bin";
+        SetEnvironment ZCCCFG "/usr/local/share/z88dk/lib/config";
     }
 }
 CleanUp $z88dkZip;

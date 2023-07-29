@@ -1,4 +1,4 @@
-chmod +x ./scripts/pull/pwsh.sh
-./scripts/pull/pwsh.sh
-clear
+chmod +x ./scripts/pull/pwsh-ubuntu.sh
+./scripts/pull/pwsh-ubuntu.sh
+#clear
 pwsh -command "&{ ./make.ps1 $@ }"
