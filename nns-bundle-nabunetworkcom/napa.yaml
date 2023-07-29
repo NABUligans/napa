@@ -3,8 +3,14 @@ name: NabuNetwork.com
 description: |
   Support for the NabuNetwork.com feed.
 author: NabuNetwork.com
-version: 1.0.2
+url: https://nabunetwork.com
+version: 1.0.4.5
 manifest:
+  paks:
+    - path: headless
+      name: NabuNetwork.com Headless
+      options:
+        headlessmenu: true
   sources:
     - path: https://www.nabunetwork.com/NabuNetwork.xml
       name: NabuNetwork.com

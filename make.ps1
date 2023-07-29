@@ -1,51 +1,164 @@
+[cmdletbinding()]
 param(
+    
     [string[]]$Include,
+    [string[]]$Exclude,
+    [string[]]$Delist,
+    [string]$Label,
     [switch]$All,
-    [switch]$OnlyNNSBundles,
-    [switch]$ExcludeNNSBundles
+    [switch]$Clean
 )
+
+$root = $PWD;
+$ErrorActionPreference = 'Stop'
+$seperator = [System.IO.Path]::PathSeparator;
+$reservedFolderNames = @(
+    'includes',
+    'repository',
+    'scripts',
+    'temp'
+)
+
+$NotNull = { $null -ne $_ }
+
+$makefile = Import-PowerShellDataFile -Path make.psd1 -ErrorAction Continue;
+$Label = [string]::IsNullOrWhiteSpace($Label) ? $makefile.Label : $Label;
+$Include = @($Include) + @($makefile.Include) | Where-Object $NotNull;
+$Exclude = @($Exclude) + @($makefile.Exclude) | Where-Object $NotNull;
+$Delist = @($Delist) + @($makefile.Delist) | Where-Object $NotNull;
+
+Write-Warning "Label: $Label";
+Write-Warning "Include: $($Include -join ',')"
+Write-Warning "Exclude: $($Exclude -join ',')"
+Write-Warning "Delist: $($Delist -join ',')"
+Write-Warning "All: $($All.IsPresent)"
+Write-Warning "Clean: $($Clean.IsPresent)"
+
+$includes = Join-Path $PWD 'includes';
 
 Install-Module -Name powershell-yaml -Force -ErrorAction SilentlyContinue;
 
-function Include([string]$name) {
-    foreach ($inc in $Include) {
-        if ($inc -eq $name) {
-            return $true;
+$z88dk = (Join-Path $includes 'z88dk');
+
+<# GLOBAL FUNCTIONS #>
+
+$makeScriptPath = Join-Path $PWD 'scripts' 'make';
+$pullScriptPath = Join-Path $PWD 'scripts' 'pull';
+
+function In([array]$list, [string]$name){
+    $should = $false;
+    foreach ($item in $list) {
+        if ($name -like $item) {
+            $should = $true;
         }
     }
-    return $false;
+    return $should;
 }
 
-$makeFiles = Get-ChildItem -Path . -Filter "make-*.ps1" -File;
-foreach ($file in $makeFiles) {
-    $name = $file.BaseName.Replace("make-", "").Replace(".ps1", "");
-    if ($All.IsPresent -or (Include $name)) {
-        Write-Warning "Make: $name";
-        &"$file";
+function Include([string]$name) {
+    return (In $Include $name);
+}
+
+function Exclude([string]$name){
+    return (In $Exclude $name);
+}
+
+function AddPath([string]$path) {
+    $newPath = "${path}${seperator}$env:PATH";
+    SetEnvironment PATH $newPath;
+}
+
+
+function RemovePath([string]$path) {
+    $newPath = "$env:PATH".Replace(
+            $path, [string]::Empty
+        ).Replace(
+            "${seperator}${seperator}", 
+            $seperator
+        );
+    SetEnvironment PATH $newPath;
+}
+
+function SetEnvironment([string]$name, [string]$value) {
+    [System.Environment]::SetEnvironmentVariable($name, $value);
+}
+
+function Pull([string]$name, [string]$packageId, [hashtable]$arguments = @{}) {
+    $pullScript = Get-ChildItem -Path $pullScriptPath -Filter "$name.ps1" -File;
+    Write-Warning "Pull: $name";
+    &"$pullScript" $packageId @arguments;
+}
+
+function Make([string]$name, [hashtable]$arguments = @{}) {
+    $makeFile = Get-ChildItem -Path $makeScriptPath -Filter "${name}.ps1" -File;
+    Write-Warning "Make: $name";
+    &"$makeFile" @arguments;
+}
+
+function CleanUp([string[]] $paths) {
+    foreach ($path in $paths) {
+        if ($Clean.IsPresent -and (Test-Path $path)) {
+            if ([System.IO.Directory]::Exists($path)) {
+                Remove-Item -Path $path -Force -Recurse;
+            } else {
+                Remove-Item -Path $path -Force;
+            }
+         }
     }
-    
 }
 
-$repo = Join-Path $PWD 'repository';
-if (!(Test-Path $repo)){
-    New-Item -Path $repo -ItemType Directory;
+function InFolder([string]$path, [scriptblock]$action){
+    $returnTo = $PWD;
+    Set-Location $path;
+    &$action;
+    Set-Location $returnTo;
 }
+
+function CloneOrPull([string]$url, [string]$path){
+    if (-not (Test-Path $path)) {
+        git clone $url $path;
+    } else {
+        InFolder $path { git pull };
+    }
+}
+
+<# END FUNCTIONS #>
+
+<# MAKE Scripts #>
+
+
+
+$makeFiles = Get-ChildItem -Path $makeScriptPath -Filter "*.ps1" -File | ForEach-Object { $_.BaseName };
+foreach ($file in $makeFiles) {
+    #$name = $file.BaseName;
+    #if (-not (Exclude $name) -and ($All.IsPresent -or (Include $name))){
+    #    Write-Warning "Make: $name";
+    #    &"$file";
+    #}
+    Make $file;
+}
+
+<# Packaging #>
+
+$repo = Join-Path $PWD 'repository' $Label;
+if (!(Test-Path $repo)){
+    New-Item -Path $repo -ItemType Directory | Out-Null;
+}
+
 $manifests = @();
 
-if ($OnlyNNSBundles.IsPresent) {
-    $dirs = get-childitem . -Filter "nns-bundle-*" -Directory
-} else {
-    $dirs = get-childitem . -Directory `
-            | Where-Object Name -ne 'includes' `
-            | Where-Object Name -ne 'repository';
-
-    if ($ExcludeNNSBundles.IsPresent) {
-        $dirs | Where-Object Name -notlike "nns-bundle-*"
-    }
-}
+$dirs = get-childitem . -Directory | Where-Object Name -notin $reservedFolderNames;
 
 foreach ($dir in $dirs){
-    $outName = "$($dir.Name).napa";
+    $name = $dir.Name;
+    if ((Exclude $name)) { 
+        Write-Warning "Skipping $name"
+        continue; 
+    } else {
+        Write-Warning "Found $name"
+    }
+
+    $outName = "$($name).napa";
     $jsonPath = Join-Path $dir.FullName 'napa.json';
     $yamlPath = Join-Path $dir.FullName 'napa.yaml';
 
@@ -53,45 +166,47 @@ foreach ($dir in $dirs){
     $yamlExists = Test-Path $yamlPath;
 
     if (!$jsonExists -and !$yamlExists) {
-        Write-Warning "No manifest found for $($dir.Name)" -ForegroundColor Red;
+        Write-Warning " - No manifest found for $($name)";
         continue;
     }
 
     if ($yamlExists) {
-        Write-Warning "Found YAML";
+        Write-Warning " - Found YAML";
         $manifest = ConvertFrom-Yaml -Yaml (Get-Content $yamlPath -Raw);
         
     } elseif ($jsonExists) {
-        Write-Warning "Found JSON";
+        Write-Warning " - Found JSON";
         $manifest = Get-Content $jsonPath -Raw | ConvertFrom-Json -AsHashtable;
     }
 
     $manifest['path'] = $outName;
     Write-Host ($manifest | out-string);
     
-    $manifests += $manifest;
+    if (-not (In $Delist $name)) {
+        $manifests += $manifest;
+    }
 
     if ($yamlExists) {
-        Write-Warning "Writing JSON";
+        Write-Warning " - Writing JSON";
         $manifest | ConvertTo-Json -Depth 100 | Out-File $jsonPath -Force;
     } 
 
     $outPath = Join-Path $repo $outName;
-    Remove-Item -Path $outPath -Force -ErrorAction Continue;
-    Write-Warning "Creating $outName"
+    if ((Test-Path $outPath)) {
+        Remove-Item -Path $outPath -Force -ErrorAction Continue;
+    }
+    Write-Warning " - Creating $outName"
     [System.IO.Compression.ZipFile]::CreateFromDirectory($dir.Fullname,$outPath);
 
     if ($yamlExists) {
-        Write-Warning "Removing JSON";
+        Write-Warning " - Removing JSON";
         Remove-Item -Path $jsonPath -Force;
     }
 }
 
-#$yamlManifests = $manifests | ForEach-Object { $_ | ConvertTo-Yaml; }
-
-#Copy-Item -Path './includes/news.yaml' -Destination $repo -Force;
-#[string]::Join("`n---`n", $yamlManifests) `
-#| Out-File (Join-Path $repo 'repo.yaml') -Force;
-
 ConvertTo-Json $manifests -Depth 100 `
 | Out-File (Join-Path $repo 'repo.json') -Force;
+
+if ($Clean.IsPresent -and (Test-Path $z88dk)) {
+   Remove-Item -Path $z88dk -Force -Recurse;
+}

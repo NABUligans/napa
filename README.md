@@ -67,8 +67,13 @@ features:                               # Control adaptor features
   NHACPv01: true
 ```
 
-They can be written in yaml or json, but package managers only need to support json. The make scripts in this repository will convert yaml to json for you during packaging.
+They final manifest must be JSON. The make scripts in this repository will convert yaml to json for you during packaging if you choose to author in yaml.
 
 ## What's in this repo?
 
-This repo contains the Benevolent Societies package repository, tools to create the packages in that repo, and the repository list itself. This is the default repository used by NABU NetSim.
+This repo contains the Benevolent Societies package repository, the default repository used by NABU NetSim.
+And all the tools to create the packages in that repo, and the repository list itself.
+
+### What do you need to build the repo?
+
+- PowerShell 7+

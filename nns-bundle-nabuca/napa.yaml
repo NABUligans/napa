@@ -3,7 +3,8 @@ name: NABU.ca
 description: |
   Support for the NABU.ca feed and files for Cloud CP/M
 author: NABU.ca
-version: 1.0.2
+url: https://www.nabu.ca
+version: 1.0.3
 manifest:
   sources:
     - path: https://cloud.nabu.ca/HomeBrew/titles/filesv2.txt
