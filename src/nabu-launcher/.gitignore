@@ -1,0 +1,12 @@
+*.lis
+*.map
+*.c
+*.h
+*.ps1
+*.bat
+*.7z
+*.pt3
+*.asm
+*.ch8
+*.sh
+not-working

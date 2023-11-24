@@ -24,7 +24,7 @@ manifest:
     - path: NDSK_HYBRID_BOOT.nabu
       name: Ishkur CPM NDSK
     - path: IDE_BOOT.nabu
-      name: Ishkur CPM IDE (Experimental)
+      name: Ishkur CPM IDE
   storage:
     - path: NDSK_A.IMG
       options:

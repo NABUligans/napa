@@ -131,10 +131,10 @@ function CloneOrPull([string]$url, [string]$path){
 $makeFiles = Get-ChildItem -Path $makeScriptPath -Filter "*.ps1" -File | ForEach-Object { $_.BaseName };
 foreach ($file in $makeFiles) {
     #$name = $file.BaseName;
-    #if (-not (Exclude $name) -and ($All.IsPresent -or (Include $name))){
+    if (-not (Exclude $name) -and ($All.IsPresent -or (Include $name))){
     #    Write-Warning "Make: $name";
     #    &"$file";
-    #}
+    }
     Make $file;
 }
 

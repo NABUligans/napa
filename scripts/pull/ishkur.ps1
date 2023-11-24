@@ -36,11 +36,11 @@ $M0 = Join-Path $storage M0;
 
 New-Item -Path $PackageId -ItemType Directory | Out-Null
 New-Item -Path $storage -ItemType Directory | Out-Null;
-New-Item -Path $A0 -ItemType Directory | Out-Null;
+#New-Item -Path $A0 -ItemType Directory | Out-Null;
 New-Item -Path $M0 -ItemType Directory | Out-Null;
 New-Item -Path $programs -ItemType Directory | Out-Null;
 
-$diskContent = Join-Path $outPath 'Directory';
+#$diskContent = Join-Path $outPath 'Directory';
 $programSource = Join-Path $outPath 'Output';
 $apps = Join-Path $outPath "/Applications/Premade";
 $ptxplay = Join-Path $outPath "/Applications/Misc/PtxPlay";
@@ -62,21 +62,22 @@ Copy-Item -Path (Join-Path $ndsk NDSK_HYBRID_CPM22.SYS) -Destination (Join-Path 
 Copy-Item -Path (Join-Path $programSource FONT.GRB) -Destination $storage -Force;
 Copy-Item -Path (Join-Path $ndsk NDSK_DEFAULT.IMG) -Destination (Join-Path $storage 'NDSK_A.IMG') -Force;
 Copy-Item -Path $blankNDSK -Destination (Join-Path $storage 'NDSK_B.IMG') -Force;
-#NFS
-Copy-Item -Path (Join-Path $nfs NFS_HYBRID_CPM22.SYS) -Destination (Join-Path $A0 'CPM22.SYS') -Force;
-Copy-Item -Path (Join-Path $programSource FONT.GRB) -Destination $A0 -Force;
-Copy-Item -Path (Join-Path $diskContent *) -Destination $A0 -Force;
 
-#IDE
-Copy-Item -Path $idegen -Destination (Join-Path $A0 'idegen.com') -Force;
+##Copy-Item -Path (Join-Path $programSource FONT.GRB) -Destination $A0 -Force;
+#Copy-Item -Path (Join-Path $diskContent *) -Destination $A0 -Force;
+
+Expand-Archive (join-path $apps CPMSoftware.zip) -DestinationPath $tmp -Force
+Move-Item -Path (Join-Path $tmp 'CPMSoftware_Updated' '*') -Destination $storage -Force;
 
 #MSXROM
 Copy-Item -Path (Join-Path $msxrom *) -Destination $M0 -Force;
 Expand-Archive (join-path $M0 'samples.wad') -DestinationPath $M0 -Force;
 Remove-Item (join-path $M0 'samples.wad');
 
-Expand-Archive (join-path $apps CPMSoftware.zip) -DestinationPath $tmp -Force
-Move-Item -Path (Join-Path $tmp 'CPMSoftware_Updated' '*') -Destination $storage -Force;
+#IDE
+Copy-Item -Path $idegen -Destination (Join-Path $A0 'idegen.com') -Force;
+#NFS
+Copy-Item -Path (Join-Path $nfs NFS_HYBRID_CPM22.SYS) -Destination (Join-Path $A0 'CPM22.SYS') -Force;
 
 Copy-Item -Path (Join-Path $ptxplay 'ptxplay.com') -Destination (Join-Path $B0 'ptxplay.com') -Force;
 
