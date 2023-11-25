@@ -1,0 +1,14 @@
+id: nns-nabu-launcher
+name: NABU Launcher
+description: |
+  Launch NABU programs from the comfort of your couch. No UI required!.
+  NNS can be switched into headless mode with `-s or --noui`
+author: Nick Daniels
+url: https://github.com/GryBsh/NabuNetworkEmulator
+version: 1.0.0.0
+manifest:
+  paks:
+    - path: launcher
+      name: NABU Launcher
+      options:
+        headlessmenu: true

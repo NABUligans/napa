@@ -1,7 +1,7 @@
 @{
-    Label = "099b6"
+    Label = "1R"
     Include=@(
-        #'ishkur'
+        'ishkur'
     )
     Exclude=@()
     Delist=@(

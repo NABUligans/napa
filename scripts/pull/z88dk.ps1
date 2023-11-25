@@ -35,7 +35,7 @@ if ($null -ne $OS) {
     }
 
 } else {
-    throw "Only Windows and macOS are currently supported"
+    throw "Only Windows and linux are currently supported"
     return;
 }
 
