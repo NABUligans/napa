@@ -1,7 +1,6 @@
 *.lis
 *.map
-*.c
-*.h
+main.*
 *.ps1
 *.bat
 *.7z
