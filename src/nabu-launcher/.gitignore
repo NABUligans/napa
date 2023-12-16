@@ -1,11 +1,6 @@
-*.lis
-*.map
-main.*
-*.ps1
-*.bat
-*.7z
+*.bin
+*.BIN
+*.NABU
+*.nabu
+bgmusic.asm
 *.pt3
-*.asm
-*.ch8
-*.sh
-not-working

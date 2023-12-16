@@ -5,7 +5,7 @@ description: |
   NNS can be switched into headless mode with `-s or --noui`
 author: Nick Daniels
 url: https://github.com/GryBsh/NabuNetworkEmulator
-version: 1.0.0.0
+version: 1.0.1
 manifest:
   paks:
     - path: launcher

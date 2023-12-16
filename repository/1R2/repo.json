@@ -1,0 +1,171 @@
+[
+  {
+    "id": "nns-bundle-classic-nabu-cycles",
+    "author": "The NABU Network",
+    "version": "1.0.1",
+    "path": "nns-bundle-classic-nabu-cycles.napa",
+    "description": "The classic 1984 NABU Network experience.\nAND Cycle Direct: skip the menu! \n",
+    "name": "Classic NABU Network Cycles",
+    "manifest": {
+      "paks": [
+        {
+          "name": "1984 Cycle 1",
+          "path": "cycle1"
+        },
+        {
+          "name": "1984 Cycle 2",
+          "path": "cycle2"
+        },
+        {
+          "options": {
+            "exploitloader": true
+          },
+          "path": "direct",
+          "name": "Cycle Direct"
+        }
+      ]
+    }
+  },
+  {
+    "id": "nns-bundle-ishkurcpm",
+    "url": "https://github.com/tergav17/IshkurCPM",
+    "features": {
+      "NHACPv01": true
+    },
+    "author": "teragav17",
+    "version": "0.1.2312161638",
+    "path": "nns-bundle-ishkurcpm.napa",
+    "description": "Ishkur is a flavor of CPM 2.2 made for the NABU from the ground up. System files are loaded via NHACP. \nThis is the 'hybrid' flavor, and supports real drives (C & D) as well as cloud disks (A,B,E,etc).\n",
+    "name": "Ishkur CPM",
+    "manifest": {
+      "storage": [
+        {
+          "options": {
+            "updatetype": "copy"
+          },
+          "path": "NDSK_A.IMG"
+        },
+        {
+          "options": {
+            "updatetype": "copy"
+          },
+          "path": "NDSK_B.IMG"
+        }
+      ],
+      "programs": [
+        {
+          "name": "Ishkur CPM NFS",
+          "path": "NFS_HYBRID_BOOT.nabu"
+        },
+        {
+          "name": "Ishkur CPM NDSK",
+          "path": "NDSK_HYBRID_BOOT.nabu"
+        },
+        {
+          "name": "Ishkur CPM IDE",
+          "path": "IDE_BOOT.nabu"
+        }
+      ]
+    }
+  },
+  {
+    "id": "nns-bundle-nabuca",
+    "url": "https://www.nabu.ca",
+    "features": {
+      "retronet": true
+    },
+    "author": "NABU.ca",
+    "version": "1.0.3",
+    "path": "nns-bundle-nabuca.napa",
+    "description": "Support for the NABU.ca feed and files for Cloud CP/M\n",
+    "name": "NABU.ca",
+    "manifest": {
+      "sources": [
+        {
+          "options": {
+            "retronetserver": true,
+            "retronet": true
+          },
+          "path": "https://cloud.nabu.ca/HomeBrew/titles/filesv2.txt",
+          "name": "NABU.ca"
+        }
+      ],
+      "storage": [
+        {
+          "options": {
+            "updatetype": "copy"
+          },
+          "path": "CCPM"
+        },
+        {
+          "options": {
+            "updatetype": "copy"
+          },
+          "path": "C.dsk"
+        }
+      ]
+    }
+  },
+  {
+    "id": "nns-bundle-nabunetworkcom",
+    "url": "https://nabunetwork.com",
+    "author": "NabuNetwork.com",
+    "version": "1.0.4.6",
+    "path": "nns-bundle-nabunetworkcom.napa",
+    "description": "Support for the NabuNetwork.com feed.\n",
+    "name": "NabuNetwork.com",
+    "manifest": {
+      "sources": [
+        {
+          "name": "NabuNetwork.com",
+          "path": "https://www.nabunetwork.com/NabuNetwork.xml"
+        }
+      ]
+    }
+  },
+  {
+    "id": "nns-bundle-productiondave-nabugames",
+    "url": "https://github.com/linuxplayground/nabu-games",
+    "author": "Production Dave",
+    "version": "3.5.3",
+    "path": "nns-bundle-productiondave-nabugames.napa",
+    "description": "A collection of games for the Nabu (and Z80 Retro) by Production Dave.\n",
+    "name": "Production Dave's Nabu Games",
+    "manifest": {
+      "programs": [
+        {
+          "name": "Invaders",
+          "path": "invaders.nabu"
+        },
+        {
+          "name": "Snake",
+          "path": "snake.nabu"
+        },
+        {
+          "name": "Tetris",
+          "path": "tetris.nabu"
+        }
+      ]
+    }
+  },
+  {
+    "id": "nns-nabu-launcher",
+    "url": "https://github.com/GryBsh/NabuNetworkEmulator",
+    "author": "Nick Daniels",
+    "version": "1.0.1",
+    "path": "nns-nabu-launcher.napa",
+    "description": "Launch NABU programs from the comfort of your couch. No UI required!.\nNNS can be switched into headless mode with `-s or --noui`\n",
+    "name": "NABU Launcher",
+    "manifest": {
+      "paks": [
+        {
+          "options": {
+            "headlessmenu": true
+          },
+          "path": "launcher",
+          "name": "NABU Launcher"
+        }
+      ]
+    }
+  }
+]
