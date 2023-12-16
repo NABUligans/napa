@@ -60,7 +60,7 @@ function Include([string]$name) {
 }
 
 function Exclude([string]$name){
-    return (In $Exclude $name);
+    return (In $Exclude $name) -and (In $Delist $name);
 }
 
 function AddPath([string]$path) {
