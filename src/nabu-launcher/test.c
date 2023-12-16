@@ -17,7 +17,7 @@ struct List
 void main() {
     vdp_set_mode(2);
 
-    byte c_joy = 0;
+    byte c_joy = 1;
 
     byte key = 0;
     int joy = 0;
@@ -32,7 +32,7 @@ void main() {
         struct List *menu = malloc(sizeof(struct List));
         printf("%c", 12);
 
-        nabu_frame(frame, 3);
+        empty_frame(frame, 3);
         frame->data[0] = 0x00;
         frame->data[1] = menuNum;
         frame->data[2] = pageNum;
