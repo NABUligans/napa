@@ -14,14 +14,25 @@
 
 #define NULL ((void *)0)
 
+#define CTRL_OFF 0x01
+#define CTRL_GREEN 0x09 
+#define CTRL_GREEN_DP 0x0D 
+#define CTRL_RED 0x11 
+#define CTRL_RED_DP 0x15
+#define CTRL_YELLOW 0x21 
+#define CTRL_YELLOW_DP 0x25
+
 /// @brief A frame of data.
 struct Frame {
 	ushort length;
 	byte* data;
 };
 
-/// @brief Creates a new frame with the specified length.
-struct Frame* new_frame(ushort length);
+/// @brief Creates a new frame with the specified length and name.
+#define nabu_frame(name, l) \
+	struct Frame* name = malloc(sizeof(struct Frame)); \
+	name->length = l; \
+	name->data = malloc(l);
 
 /// @brief Writes a frame to the HCCA. Command can be NULL. 
 void hcca_writeFrame(byte command, struct Frame* frame);
@@ -31,7 +42,8 @@ void hcca_writeFrame(byte command, struct Frame* frame);
 struct Frame* hcca_readFrame();
 
 /// @brief Writes a byte to the NABU control register.
-void nabu_write_control_reg(byte value);
+#define nabu_writeControl(value) \
+    outp(0x0000, (byte)value);
 
 /// @brief Resets the NABU.
 void nabu_reset(bool coldBoot);
