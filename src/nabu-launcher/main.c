@@ -7,8 +7,6 @@
 #define _Str_Page_Back "< ";
 #define _Str_Page_Forward " >";
 
-
-
 struct List *menu;
 struct List *mainMenu;
 //struct Menu *adaptors;
@@ -25,110 +23,10 @@ void main()
 	state->itemNum = 0;
 
 	settings = malloc(sizeof(struct Settings));
-	settings->joystick = 0;
+	settings->joystick = 1;
 	
-	_Change_Menu(true);	
-}
-
-struct List* ReadMenu(struct Frame *frame) 
-{
-	struct List *menu = malloc(sizeof(struct List));
-	menu->pages = frame->data[0];
-	int count = 0;
-	for (int i = 1; i < frame->length; count++ )
-	{
-		byte n_length = frame->data[i++];
-		char *name = malloc(n_length);	
-		for (int n = 0; n < n_length; n++)
-		{       
-			name[n] = frame->data[i++];
-		}
-		name[n_length] = '\0';
-		menu->items[count] = name;
-	}
-	menu->count = count;
-	free(frame);
-	return menu;
-}
-
-struct List* RequestAdaptors() 
-{
-	
-	vdp_noblank();
-	nabu_frame(req, 1)
-	req->data[0] = 0x10;
-	hcca_writeFrame(0x30, req);
-	struct Frame *frame = hcca_readFrame();
-	nabu_writeControl(CTRL_GREEN);
-	struct List *list = ReadMenu(frame);
-	free(frame);
-	return list;
-}
-
-struct List* RequestMenu()
-{
-	vdp_noblank();
-	nabu_frame(req, 3)
-	req->data[0] = 0x00;
-	req->data[1] = state->menuNum;
-	req->data[2] = state->pageNum;
-	hcca_writeFrame(0x30, req);
-	struct Frame *frame = hcca_readFrame();
-	nabu_writeControl(CTRL_GREEN);
-	struct List *menu = ReadMenu(frame);
-	free(frame);
-	if (state->menuNum == 0) mainMenu = menu;
-	return menu;
-}
-
-void PrintMenu(bool loop)
-{				
-	_Clr_Screen();
-	//nabu_write_control_reg(CTRL_GREEN);
-	if (state->menuNum == 0) { _Write_Str_Neg("NABU Launcher"); }
-	else { _Write_Str_Neg(mainMenu->items[state->menuNum-1]); }
-	
-	_Set_Cursor_Line(UI_FOOTER_LINE);
-	_Write_Str_Neg("H: Help|O: Options");
-	_Set_Cursor_Line(MENU_START_LINE);
-
-	// Print the menu
-	for (byte i = 0; i < menu->count; i++)
-	{
-		if (i == state->itemNum) {
-			_Write_Str_Neg(menu->items[i]);
-		}
-		else {
-			_Write_Str(menu->items[i]);
-		}
-	}
-
-	#ifndef DEBUG_MODE
-	char *footer = malloc(32);
-	if (menu->pages > 1)
-	{
-		char *lead = malloc(2);
-		char *tail = malloc(2);
-
-		if (state->menuNum > 0) {
-			if (state->pageNum > 0) { lead = _Str_Page_Back; }
-			else { lead = _Str_Jump_Back; }
-		}
-
-		if (state->pageNum < menu->pages-1) { tail = _Str_Page_Forward; }
-		else { tail = _Str_Jump_Forward; }
-
-		sprintf(footer, "%s  %d/%d  %s", lead, state->pageNum+1, menu->pages, tail);
-	} else footer = "";
-	
-	_Set_Cursor_Line(MENU_FOOTER_LINE);
-	_Write(footer, VDP_INK_BLACK, VDP_INK_WHITE);
-	#endif
-	nabu_writeControl(CTRL_OFF);
-	vdp_blank();
-	
-	
-	while (loop)
+	_Change_Menu();
+	while (true)
 	{	
 		byte key = 0;
 		int joy = 0;
@@ -168,17 +66,17 @@ void PrintMenu(bool loop)
 			if (state->menuNum > 0 && state->pageNum == 0)
 			{	// Back Home
 				state->menuNum = 0;
-				_Change_Menu(false);
+				_Change_Menu();
 			}
 			else if (state->pageNum > 0)
 			{	// Back Page
 				state->pageNum--;
-				_Change_Menu(false);
+				_Change_Menu();
 			}
 			else if (state->pageNum == 0 && menu->pages > 1)
 			{ 	// To Last Page (Only works on the home page)
 				state->pageNum = menu->pages-1;
-				_Change_Menu(false);
+				_Change_Menu();
 			}
 		}
 		else if ((key == 0xE0 || key == 0xE4) || joy & MOVE_RIGHT)
@@ -186,16 +84,16 @@ void PrintMenu(bool loop)
 			if (state->menuNum == 0) {
 				state->menuNum = state->itemNum+1;
 				state->pageNum = 0;
-				_Change_Menu(false);
+				_Change_Menu();
 			}
 			else if ((state->pageNum == 0 && menu->pages > 1) || state->pageNum != menu->pages-1)
 			{
 				state->pageNum++;
-				_Change_Menu(false);
+				_Change_Menu();
 			}
 			else if (state->pageNum == menu->pages-1) {
 				state->pageNum = 0;
-				_Change_Menu(false);
+				_Change_Menu();
 			}
 		}
 		else if ((key == 0x0D) || joy & MOVE_FIRE)
@@ -204,14 +102,11 @@ void PrintMenu(bool loop)
 			{
 				state->menuNum = state->itemNum+1;
 				state->pageNum = 0;
-				_Change_Menu(false);
+				_Change_Menu();
 			}
 			else
 			{
-				byte bootMode = Select();
-				if (bootMode == 0x00) continue;
-				loop = false;
-				nabu_reset(bootMode == 0xFE ? true : false);
+				_Select_Item();
 			}
 		}
 		else if (key == 0x1B) 
@@ -219,26 +114,140 @@ void PrintMenu(bool loop)
 			if (state->pageNum > 1) 
 			{ 	//Back to the first page
 				state->pageNum = 0;
-				_Change_Menu(false);
+				_Change_Menu();
 			} else if (state->menuNum > 0) 
 			{ 	//Back to the main menu
 				state->menuNum = 0; 
 				state->pageNum = 0;
-				_Change_Menu(false);
+				_Change_Menu();
 			}
 		}
 		else if (key == 0x68 || key == 0x48) 
 		{ 	//h or H
 			PrintHelp();
-			PrintMenu(false);
+			PrintMenu();
 		}
 		else if (key == 0x6F || key == 0x4F) //o or O
 		{ 	//adaptors = RequestAdaptors();
 			PrintOptions();
-			PrintMenu(false);
+			PrintMenu();
+		}
+	}	
+}
+
+struct List* ReadMenu(struct Frame *frame) 
+{
+	struct List *menu = malloc(sizeof(struct List));
+	menu->pages = frame->data[0];
+	int count = 0;
+	for (int i = 1; i < frame->length; count++ )
+	{
+		byte n_length = frame->data[i++];
+		char *name = malloc(n_length);	
+		for (int n = 0; n < n_length; n++)
+		{       
+			name[n] = frame->data[i++];
+		}
+		name[n_length] = '\0';
+		menu->items[count] = name;
+	}
+	menu->count = count;
+	free(frame);
+	return menu;
+}
+
+struct List* RequestAdaptors() 
+{
+	
+	vdp_noblank();
+	empty_frame(req, 1)
+	req->data[0] = 0x10;
+	hcca_writeFrame(0x30, req);
+	struct Frame *frame = hcca_readFrame();
+	nabu_writeControl(CTRL_GREEN);
+	struct List *list = ReadMenu(frame);
+	free(frame);
+	return list;
+}
+
+struct List* RequestMenu()
+{
+	vdp_noblank();
+	empty_frame(req, 3)
+	req->data[0] = 0x00;
+	req->data[1] = state->menuNum;
+	req->data[2] = state->pageNum;
+	hcca_writeFrame(0x30, req);
+	struct Frame *frame = hcca_readFrame();
+	nabu_writeControl(CTRL_GREEN);
+	struct List *menu = ReadMenu(frame);
+	free(frame);
+	if (state->menuNum == 0) mainMenu = menu;
+	return menu;
+}
+
+void PrintMenu()
+{			
+	vdp_noblank();
+	nabu_writeControl(CTRL_GREEN);	
+	_Clr_Screen();
+	//nabu_write_control_reg(CTRL_GREEN);
+	if (state->menuNum == 0) { _Write_Str_Neg("NABU Launcher"); }
+	else { _Write_Str_Neg(mainMenu->items[state->menuNum-1]); }
+	
+	if (menu->count == 0) {
+		_Set_Cursor_Line(MENU_START_LINE);
+		_Write_Str("No items found.");
+		_Set_Cursor_Line(UI_FOOTER_LINE);
+		_Write_Str_Neg("H: Help|O: Options");
+		nabu_writeControl(CTRL_OFF);
+		vdp_blank();
+		return;
+	} 
+	if (menu->count == 1) {
+		nabu_writeControl(CTRL_OFF);
+		vdp_blank();
+		_Select_Item();
+	}
+
+	_Set_Cursor_Line(UI_FOOTER_LINE);
+	_Write_Str_Neg("H: Help|O: Options");
+	_Set_Cursor_Line(MENU_START_LINE);
+
+	// Print the menu
+	for (byte i = 0; i < menu->count; i++)
+	{
+		if (i == state->itemNum) {
+			_Write_Str_Neg(menu->items[i]);
+		}
+		else {
+			_Write_Str(menu->items[i]);
 		}
 	}
+
+	#ifndef DEBUG_MODE
+	char *footer = malloc(32);
+	if (menu->pages > 1)
+	{
+		char *lead = malloc(2);
+		char *tail = malloc(2);
+
+		if (state->menuNum > 0) {
+			if (state->pageNum > 0) { lead = _Str_Page_Back; }
+			else { lead = _Str_Jump_Back; }
+		}
+
+		if (state->pageNum < menu->pages-1) { tail = _Str_Page_Forward; }
+		else { tail = _Str_Jump_Forward; }
+
+		sprintf(footer, "%s  %d/%d  %s", lead, state->pageNum+1, menu->pages, tail);
+	} else footer = "";
 	
+	_Set_Cursor_Line(MENU_FOOTER_LINE);
+	_Write(footer, VDP_INK_BLACK, VDP_INK_WHITE);
+	#endif
+	nabu_writeControl(CTRL_OFF);
+	vdp_blank();
 }
 
 #define HELP_TEXT_BACK "<||/Left/ESC: Back"
@@ -286,8 +295,7 @@ void PrintHelp()
 		}
 	}
 	
-	vdp_noblank();
-	nabu_writeControl(CTRL_GREEN);
+	
 }
 
 void PrintOptions()
@@ -303,14 +311,14 @@ void PrintOptions()
 
 	byte key = 0;
 	uint joy = 0;
-	byte choice = settings->joystick;
+	byte choice = settings->joystick-1;
 	bool loop = true;
 			
 	_Set_Cursor_Line(MENU_START_LINE);
 	_Write("Joystick:", VDP_INK_BLACK, VDP_INK_WHITE);
 	for (byte j = 0; j < GAME_DEVICES; j++)
 	{	
-		if (j == settings->joystick) {
+		if (j == choice) {
 			_Write_Str_Neg(joystick_type[j]);
 		}
 		else _Write_Str(joystick_type[j]);
@@ -323,7 +331,7 @@ void PrintOptions()
 	while (1)
 	{
 		_Set_Cursor_Line(v_offset2);
-		printf("Current: %23s", joystick_type[settings->joystick]);
+		printf("Current: %23s", joystick_type[settings->joystick-1]);
 		do {
 			key = getk();
 			joy = joystick(settings->joystick);	
@@ -347,12 +355,10 @@ void PrintOptions()
 		//else if (key == 0x45 || key == 0x65) {
 		if ((key == 0xE1 || key == 0xE5) || key == 0x1B || joy & MOVE_LEFT) {
 			//free(adaptors);
-			vdp_noblank();
-			nabu_writeControl(CTRL_GREEN);
 			return;
 		}
 		else if (key == 0x0D){
-			settings->joystick = choice;
+			settings->joystick = choice+1;
 		}	
 	}
 }
@@ -360,7 +366,7 @@ void PrintOptions()
 byte Select()
 {
 	nabu_writeControl(CTRL_YELLOW);
-	nabu_frame(req, 4)
+	empty_frame(req, 4)
 	req->data[0] = 0x01;
 	req->data[1] = state->menuNum;
 	req->data[2] = state->pageNum;

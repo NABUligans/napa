@@ -59,11 +59,11 @@
     _Set_Color_Reg; \
     _Disable_Scrolling();
 
-#define _Change_Menu(loop) \
+#define _Change_Menu() \
 	state->itemNum = 0; \
 	free(menu); \
 	menu = RequestMenu(); \
-	PrintMenu(loop);
+	PrintMenu();
 
 // END
 
@@ -86,6 +86,11 @@
 	_Write_Str_Neg(list[selection]);
 
 
+#define _Select_Item() \
+	byte bootMode = Select(); \
+	if (bootMode != 0x00) \
+		nabu_reset(bootMode == 0xFE ? true : false);
+
 /// @brief A page of items from a larger set
 struct List
 {
@@ -107,9 +112,8 @@ struct State
 struct Settings {
 	byte joystick;
 };
-/// @brief Prints the menu and optionally enters the main loop
-/// @param loop if true, it will enter the main loop
-void PrintMenu(bool loop);
+/// @brief Prints the menu
+void PrintMenu();
 /// @brief Prints the help screen
 void PrintHelp();
 /// @brief Prints the options screen

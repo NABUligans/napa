@@ -29,7 +29,7 @@ struct Frame {
 };
 
 /// @brief Creates a new frame with the specified length and name.
-#define nabu_frame(name, l) \
+#define empty_frame(name, l) \
 	struct Frame* name = malloc(sizeof(struct Frame)); \
 	name->length = l; \
 	name->data = malloc(l);
