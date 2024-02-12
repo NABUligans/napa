@@ -1,8 +1,11 @@
 [
   {
-    "version": "1.0.1",
-    "description": "The classic 1984 NABU Network experience.\nAND Cycle Direct: skip the menu! \n",
+    "id": "nns-bundle-classic-nabu-cycles",
     "author": "The NABU Network",
+    "version": "1.0.1",
+    "path": "nns-bundle-classic-nabu-cycles.napa",
+    "description": "The classic 1984 NABU Network experience.\nAND Cycle Direct: skip the menu! \n",
+    "name": "Classic NABU Network Cycles",
     "manifest": {
       "paks": [
         {
@@ -21,34 +24,20 @@
           "name": "Cycle Direct"
         }
       ]
-    },
-    "name": "Classic NABU Network Cycles",
-    "path": "nns-bundle-classic-nabu-cycles.napa",
-    "id": "nns-bundle-classic-nabu-cycles"
+    }
   },
   {
-    "version": "0.1.3",
-    "description": "Ishkur is a flavor of CPM 2.2 made for the NABU from the ground up. System files are loaded via NHACP. \nThis is the 'hybrid' flavor, and supports real drives (C & D) as well as cloud disks (A,B,E,etc).\n",
+    "id": "nns-bundle-ishkurcpm",
+    "url": "https://github.com/tergav17/IshkurCPM",
     "features": {
       "NHACPv01": true
     },
-    "url": "https://github.com/tergav17/IshkurCPM",
     "author": "teragav17",
+    "version": "0.1.2312161638",
+    "path": "nns-bundle-ishkurcpm.napa",
+    "description": "Ishkur is a flavor of CPM 2.2 made for the NABU from the ground up. System files are loaded via NHACP. \nThis is the 'hybrid' flavor, and supports real drives (C & D) as well as cloud disks (A,B,E,etc).\n",
+    "name": "Ishkur CPM",
     "manifest": {
-      "programs": [
-        {
-          "name": "Ishkur CPM NFS",
-          "path": "NFS_HYBRID_BOOT.nabu"
-        },
-        {
-          "name": "Ishkur CPM NDSK",
-          "path": "NDSK_HYBRID_BOOT.nabu"
-        },
-        {
-          "name": "Ishkur CPM IDE",
-          "path": "IDE_BOOT.nabu"
-        }
-      ],
       "storage": [
         {
           "options": {
@@ -62,21 +51,45 @@
           },
           "path": "NDSK_B.IMG"
         }
+      ],
+      "programs": [
+        {
+          "name": "Ishkur CPM NFS",
+          "path": "NFS_HYBRID_BOOT.nabu"
+        },
+        {
+          "name": "Ishkur CPM NDSK",
+          "path": "NDSK_HYBRID_BOOT.nabu"
+        },
+        {
+          "name": "Ishkur CPM IDE",
+          "path": "IDE_BOOT.nabu"
+        }
       ]
-    },
-    "name": "Ishkur CPM",
-    "path": "nns-bundle-ishkurcpm.napa",
-    "id": "nns-bundle-ishkurcpm"
+    }
   },
   {
-    "version": "1.0.3",
-    "description": "Support for the NABU.ca feed and files for Cloud CP/M\n",
+    "id": "nns-bundle-nabuca",
+    "url": "https://www.nabu.ca",
     "features": {
       "retronet": true
     },
-    "url": "https://www.nabu.ca",
     "author": "NABU.ca",
+    "version": "1.0.3",
+    "path": "nns-bundle-nabuca.napa",
+    "description": "Support for the NABU.ca feed and files for Cloud CP/M\n",
+    "name": "NABU.ca",
     "manifest": {
+      "sources": [
+        {
+          "options": {
+            "retronetserver": true,
+            "retronet": true
+          },
+          "path": "https://cloud.nabu.ca/HomeBrew/titles/filesv2.txt",
+          "name": "NABU.ca"
+        }
+      ],
       "storage": [
         {
           "options": {
@@ -90,27 +103,17 @@
           },
           "path": "C.dsk"
         }
-      ],
-      "sources": [
-        {
-          "options": {
-            "retronet": true,
-            "retronetserver": true
-          },
-          "path": "https://cloud.nabu.ca/HomeBrew/titles/filesv2.txt",
-          "name": "NABU.ca"
-        }
       ]
-    },
-    "name": "NABU.ca",
-    "path": "nns-bundle-nabuca.napa",
-    "id": "nns-bundle-nabuca"
+    }
   },
   {
-    "version": "1.0.4.6",
-    "description": "Support for the NabuNetwork.com feed.\n",
+    "id": "nns-bundle-nabunetworkcom",
     "url": "https://nabunetwork.com",
     "author": "NabuNetwork.com",
+    "version": "1.0.4.6",
+    "path": "nns-bundle-nabunetworkcom.napa",
+    "description": "Support for the NabuNetwork.com feed.\n",
+    "name": "NabuNetwork.com",
     "manifest": {
       "sources": [
         {
@@ -118,16 +121,16 @@
           "path": "https://www.nabunetwork.com/NabuNetwork.xml"
         }
       ]
-    },
-    "name": "NabuNetwork.com",
-    "path": "nns-bundle-nabunetworkcom.napa",
-    "id": "nns-bundle-nabunetworkcom"
+    }
   },
   {
-    "version": "3.5.3",
-    "description": "A collection of games for the Nabu (and Z80 Retro) by Production Dave.\n",
+    "id": "nns-bundle-productiondave-nabugames",
     "url": "https://github.com/linuxplayground/nabu-games",
     "author": "Production Dave",
+    "version": "3.5.3",
+    "path": "nns-bundle-productiondave-nabugames.napa",
+    "description": "A collection of games for the Nabu (and Z80 Retro) by Production Dave.\n",
+    "name": "Production Dave's Nabu Games",
     "manifest": {
       "programs": [
         {
@@ -143,16 +146,16 @@
           "path": "tetris.nabu"
         }
       ]
-    },
-    "name": "Production Dave's Nabu Games",
-    "path": "nns-bundle-productiondave-nabugames.napa",
-    "id": "nns-bundle-productiondave-nabugames"
+    }
   },
   {
-    "version": "1.0.5",
-    "description": "Launch NABU programs from the comfort of your couch. No UI required!.\nNNS can be switched into headless mode with `-s or --noui`\n",
+    "id": "nns-nabu-launcher",
     "url": "https://github.com/GryBsh/NabuNetworkEmulator",
     "author": "Nick Daniels",
+    "version": "1.0.1",
+    "path": "nns-nabu-launcher.napa",
+    "description": "Launch NABU programs from the comfort of your couch. No UI required!.\nNNS can be switched into headless mode with `-s or --noui`\n",
+    "name": "NABU Launcher",
     "manifest": {
       "paks": [
         {
@@ -163,9 +166,6 @@
           "name": "NABU Launcher"
         }
       ]
-    },
-    "name": "NABU Launcher",
-    "path": "nns-nabu-launcher.napa",
-    "id": "nns-nabu-launcher"
+    }
   }
 ]
