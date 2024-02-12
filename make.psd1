@@ -1,10 +1,14 @@
 @{
     Label = "1R2"
     Include=@(
-        #'ishkur'
+        #'prebuilt'
     )
-    Exclude=@()
+    Exclude=@(
+        'ishkur'
+        'nabugames'
+    )
     Delist=@(
         'nns-bundle-nabufun'
     )
+    
 }

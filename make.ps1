@@ -46,13 +46,13 @@ $makeScriptPath = Join-Path $PWD 'scripts' 'make';
 $pullScriptPath = Join-Path $PWD 'scripts' 'pull';
 
 function In([array]$list, [string]$name){
-    $should = $false;
+    
     foreach ($item in $list) {
         if ($name -like $item) {
-            $should = $true;
+            return $true;
         }
     }
-    return $should;
+    return $false;
 }
 
 function Include([string]$name) {
@@ -130,12 +130,9 @@ function CloneOrPull([string]$url, [string]$path){
 
 $makeFiles = Get-ChildItem -Path $makeScriptPath -Filter "*.ps1" -File | ForEach-Object { $_.BaseName };
 foreach ($file in $makeFiles) {
-    #$name = $file.BaseName;
-    if (-not (Exclude $name) -and ($All.IsPresent -or (Include $name))){
-    #    Write-Warning "Make: $name";
-    #    &"$file";
+    if (-not (Exclude $file)){
+        Make $file;
     }
-    Make $file;
 }
 
 <# Packaging #>

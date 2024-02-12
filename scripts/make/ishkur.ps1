@@ -3,8 +3,8 @@ param (
     [string]$MajorVersion = '0.1'
 )
 
-$MinorVersion = (Get-Date).ToString("yyMMddHHmm");
-$Version = "$MajorVersion.$MinorVersion";
+#$MinorVersion = (Get-Date).ToString("yyMMddHHmm");
+$Version = "$MajorVersion.3";
 
 Pull 'ishkur' $PackageId;
 
