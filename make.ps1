@@ -6,7 +6,8 @@ param(
     [string[]]$Delist,
     [string]$Label,
     [switch]$All,
-    [switch]$Clean
+    [switch]$Clean,
+    [switch]$SkipMake
 )
 
 $root = $PWD;
@@ -126,12 +127,12 @@ function CloneOrPull([string]$url, [string]$path){
 
 <# MAKE Scripts #>
 
-
-
-$makeFiles = Get-ChildItem -Path $makeScriptPath -Filter "*.ps1" -File | ForEach-Object { $_.BaseName };
-foreach ($file in $makeFiles) {
-    if (-not (Exclude $file)){
-        Make $file;
+if (-not $SkipMake.IsPresent) {
+    $makeFiles = Get-ChildItem -Path $makeScriptPath -Filter "*.ps1" -File | ForEach-Object { $_.BaseName };
+    foreach ($file in $makeFiles) {
+        if (-not (Exclude $file)){
+            Make $file;
+        }
     }
 }
 
