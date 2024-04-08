@@ -1,10 +1,9 @@
 @{
-    Label = "1R2"
+    Label = "1R3"
     Include=@(
-        #'prebuilt'
+        
     )
     Exclude=@(
-        'ishkur'
         'nabugames'
     )
     Delist=@(

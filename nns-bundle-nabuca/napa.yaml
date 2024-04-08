@@ -4,10 +4,10 @@ description: |
   Support for the NABU.ca feed and files for Cloud CP/M
 author: NABU.ca
 url: https://www.nabu.ca
-version: 1.0.3
+version: 1.0.4
 manifest:
   sources:
-    - path: https://cloud.nabu.ca/HomeBrew/titles/filesv2.txt
+    - path: https://cloud.nabu.ca/HomeBrew/titles/filesV3.json
       name: NABU.ca
       options:
         retronet: true
@@ -21,3 +21,4 @@ manifest:
         updatetype: copy
 features:
   retronet: true
+  headlessmenu: true  

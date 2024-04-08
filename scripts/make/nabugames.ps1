@@ -1,6 +1,6 @@
 param(
     [string]$PackageId = "nns-bundle-productiondave-nabugames",
-    [string]$Version = "3.5",
+    [string]$Version = "3.5.1",
     [string]$RepoUrl = "https://github.com/linuxplayground/nabu-games"
 )
 

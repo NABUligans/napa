@@ -1,6 +1,6 @@
 param(
     [string]$PackageId = "nns-bundle-productiondave-nabugames",
-    [string]$Version = "3.5",
+    [string]$Version = "3.5.1",
     [string]$RepoUrl = "https://github.com/linuxplayground/nabu-games"
 )
 
@@ -8,8 +8,7 @@ param(
 #$MinorVersion = (Get-Date).ToString("yyMMddHHmm");
 #$Version = "$Version.$MinorVersion";
 $entries = @();
-
-$url = "$RepoUrl/releases/download/v${Version}/nabu-games-v${Version}.zip"
+$url = "$RepoUrl/releases/download/v${Version}/nabu-games-${Version}.zip"
 $outFile = Join-Path $PWD "includes/nabu-games.zip"
 
 Write-Warning "Downloading $url to $outFile"
@@ -36,6 +35,12 @@ Expand-Archive $outFile -DestinationPath $tmp
 
 $dirs = Get-ChildItem -Path $tmp -Directory;
 
+$descriptions = @{
+    "tetris" = "A Tetris clone for the Nabu by Production Dave.";
+    "snake" = "A Snake clone for the Nabu by Production Dave.";
+    "invaders" = "A Space Invaders clone for the Nabu by Production Dave.";
+}
+
 foreach ($dir in $dirs) {
     Copy-Item -Path (Join-Path $dir.FullName "$($dir.Name.ToUpper()).COM") -Destination $B1 -Force;
     $displayName = [cultureinfo]::InvariantCulture.TextInfo.ToTitleCase($dir.Name);
@@ -44,6 +49,8 @@ foreach ($dir in $dirs) {
     #$entries += @{"name" = $name; "path" = "${name}.nabu"};
     $entries += "    - name: ${displayName}"
     $entries += "      path: '${name}.nabu'"
+    $entries += "      author: Production Dave"
+    $entries += "      description: $($descriptions[$name])"
 }
 
 CleanUp $outFile;

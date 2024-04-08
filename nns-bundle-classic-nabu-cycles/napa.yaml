@@ -3,17 +3,21 @@ name: Classic NABU Network Cycles
 description: |
   The classic 1984 NABU Network experience.
   AND Cycle Direct: skip the menu! 
-author: The NABU Network
+author: NABU Corporation
 version: 1.0.3
 manifest:
   paks:
     - path: cycle1
       name: 1984 Cycle 1
+      description: The first cycle recovered by Leo Binkowski
     - path: cycle2
       name: 1984 Cycle 2
+      description: The second of the cycles recovered by Leo Binkowski
     - path: cycle3
       name: 1986 Cycle 3
+      description: The third cycle, recovered in 2024, by Leo Binkowski
     - path: direct
       name: Cycle Direct
+      description: Skip the menu, launch any program in all 3 cycles directly.
       options:
         exploitloader: true

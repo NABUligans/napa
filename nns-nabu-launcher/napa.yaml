@@ -5,10 +5,11 @@ description: |
   NNS can be switched into headless mode with `-s or --noui`
 author: Nick Daniels
 url: https://github.com/GryBsh/NabuNetworkEmulator
-version: 1.0.1
+version: 1.0.5
 manifest:
   paks:
     - path: launcher
       name: NABU Launcher
+      description: The original headless launcher for the NABU
       options:
         headlessmenu: true
