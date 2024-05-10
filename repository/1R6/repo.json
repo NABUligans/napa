@@ -1,0 +1,274 @@
+[
+  {
+    "author": "NABU Corporation",
+    "description": "The classic 1984 NABU Network experience.\nAND Cycle Direct: skip the menu! \n",
+    "id": "nns-bundle-classic-nabu-cycles",
+    "version": "1.0.3",
+    "path": "nns-bundle-classic-nabu-cycles.napa",
+    "name": "Classic NABU Network Cycles",
+    "manifest": {
+      "paks": [
+        {
+          "path": "cycle1",
+          "name": "1984 Cycle 1",
+          "description": "The first cycle recovered by Leo Binkowski"
+        },
+        {
+          "path": "cycle2",
+          "name": "1984 Cycle 2",
+          "description": "The second of the cycles recovered by Leo Binkowski"
+        },
+        {
+          "path": "cycle3",
+          "name": "1986 Cycle 3",
+          "description": "The third cycle, recovered in 2024, by Leo Binkowski"
+        },
+        {
+          "path": "direct",
+          "name": "Cycle Direct",
+          "options": {
+            "exploitloader": true
+          },
+          "description": "Skip the menu, launch any program in all 3 cycles directly."
+        }
+      ]
+    }
+  },
+  {
+    "author": "The NABU Community",
+    "description": "A collection of NABU Games and ports from other systems \n",
+    "id": "nns-bundle-games-and-ports",
+    "version": 1,
+    "path": "nns-bundle-games-and-ports.napa",
+    "name": "Games + Ports",
+    "manifest": {
+      "programs": [
+        {
+          "author": "BriJohn",
+          "path": "arkanoid.nabu",
+          "name": "Arkanoid",
+          "description": "A port from the MSX by BriJohn"
+        },
+        {
+          "author": "BriJohn",
+          "path": "bomberman.nabu",
+          "name": "BomberMan",
+          "description": "A port from the MSX by BriJohn"
+        },
+        {
+          "author": "BriJohn",
+          "path": "boulderdash.nabu",
+          "name": "BoulderDash",
+          "description": "A port from the MSX by BriJohn"
+        },
+        {
+          "author": "BriJohn",
+          "path": "choplifter.nabu",
+          "name": "ChopLifter",
+          "description": "A port from the MSX by BriJohn"
+        },
+        {
+          "author": "E.E Johnson",
+          "path": "deepdundeon.nabu",
+          "name": "Deep Dungeon Adventures",
+          "description": "A port of from the MSX by E.E Johnson"
+        },
+        {
+          "author": "BriJohn",
+          "path": "elevator.nabu",
+          "name": "Elevator Action!",
+          "description": "A port from the MSX by BriJohn"
+        },
+        {
+          "author": "BriJohn",
+          "path": "hero.nabu",
+          "name": "H.E.R.O",
+          "description": "A port from the MSX by Brijohn"
+        },
+        {
+          "author": "BriJohn",
+          "path": "hyperrally.nabu",
+          "name": "Hyper Rally",
+          "description": "A port from the MSX by BriJohn"
+        },
+        {
+          "author": "Production Dave",
+          "path": "invaders.nabu",
+          "name": "Invaders",
+          "description": "A Space Invaders clone for the Nabu by Production Dave."
+        },
+        {
+          "author": "Licca",
+          "path": "lr.nabu",
+          "name": "Lode Runner (SMS Pad)",
+          "description": "A port from the MSX by Licca"
+        },
+        {
+          "author": "BriJohn",
+          "path": "riverraid.nabu",
+          "name": "River Raid",
+          "description": "A port from the MSX by BriJohn"
+        },
+        {
+          "author": "BriJohn",
+          "path": "roadfighter.nabu",
+          "name": "Road Fighter"
+        },
+        {
+          "author": "Production Dave",
+          "path": "snake.nabu",
+          "name": "Snake",
+          "description": "A Snake clone for the Nabu by Production Dave."
+        },
+        {
+          "author": "Production Dave",
+          "path": "tetris.nabu",
+          "name": "Tetris",
+          "description": "A Tetris clone for the Nabu by Production Dave."
+        },
+        {
+          "author": "BriJohn",
+          "path": "thexder.nabu",
+          "name": "Thexder",
+          "description": "A port from the MSX by Brijohn"
+        },
+        {
+          "author": "E.E Johnson",
+          "path": "virus.nabu",
+          "name": "Virus",
+          "description": "A port from the MSX by E.E Johnson"
+        }
+      ]
+    }
+  },
+  {
+    "author": "teragav17",
+    "features": {
+      "NHACPv01": true
+    },
+    "description": "Ishkur is a flavor of CPM 2.2 made for the NABU from the ground up. System files are loaded via NHACP. \nThis is the 'hybrid' flavor, and supports real drives (C & D) as well as cloud disks (A,B,E,etc).\n",
+    "id": "nns-bundle-ishkurcpm",
+    "version": "0.1.3",
+    "path": "nns-bundle-ishkurcpm.napa",
+    "url": "https://github.com/tergav17/IshkurCPM",
+    "name": "Ishkur CPM",
+    "manifest": {
+      "storage": [
+        {
+          "path": "NDSK_A.IMG",
+          "options": {
+            "updatetype": "copy"
+          }
+        },
+        {
+          "path": "NDSK_B.IMG",
+          "options": {
+            "updatetype": "copy"
+          }
+        }
+      ],
+      "programs": [
+        {
+          "author": "teragav17",
+          "path": "NFS_HYBRID_BOOT.nabu",
+          "name": "Ishkur CPM NFS",
+          "description": "Ishkur CP/M with the Hybrid NFS driver."
+        },
+        {
+          "author": "teragav17",
+          "path": "NDSK_HYBRID_BOOT.nabu",
+          "name": "Ishkur CPM NDSK",
+          "description": "Ishkur CP/M with the Hybrid NDSK driver"
+        },
+        {
+          "author": "teragav17",
+          "path": "IDE_BOOT.nabu",
+          "name": "Ishkur CPM IDE",
+          "description": "Ishkur CP/M with the Hybrid IDE driver"
+        }
+      ]
+    }
+  },
+  {
+    "author": "NABU.ca",
+    "features": {
+      "retronet": true,
+      "headlessmenu": true
+    },
+    "description": "Support for the NABU.ca feed and files for Cloud CP/M\n",
+    "name": "NABU.ca",
+    "id": "nns-bundle-nabuca",
+    "version": "1.0.4",
+    "path": "nns-bundle-nabuca.napa",
+    "url": "https://www.nabu.ca",
+    "manifest": {
+      "storage": [
+        {
+          "path": "CCPM",
+          "options": {
+            "updatetype": "copy"
+          }
+        },
+        {
+          "path": "C.dsk",
+          "options": {
+            "updatetype": "copy"
+          }
+        }
+      ],
+      "sources": [
+        {
+          "path": "https://cloud.nabu.ca/HomeBrew/titles/filesV3.json",
+          "name": "NABU.ca",
+          "options": {
+            "retronet": true,
+            "retronetserver": true
+          }
+        }
+      ],
+      "content": [
+        {
+          "path": "nabu internet adapter.config.json"
+        }
+      ]
+    }
+  },
+  {
+    "author": "NabuNetwork.com",
+    "description": "Support for the NabuNetwork.com feed.\n",
+    "name": "NabuNetwork.com",
+    "id": "nns-bundle-nabunetworkcom",
+    "version": "1.0.4.6",
+    "path": "nns-bundle-nabunetworkcom.napa",
+    "url": "https://nabunetwork.com",
+    "manifest": {
+      "sources": [
+        {
+          "path": "https://www.nabunetwork.com/NabuNetwork.xml",
+          "name": "NabuNetwork.com"
+        }
+      ]
+    }
+  },
+  {
+    "author": "Nick Daniels",
+    "description": "Launch NABU programs from the comfort of your couch. No UI required!.\nNNS can be switched into headless mode with `-s or --noui`\n",
+    "name": "NABU Launcher",
+    "id": "nns-nabu-launcher",
+    "version": "1.2.0",
+    "path": "nns-nabu-launcher.napa",
+    "url": "https://github.com/GryBsh/NabuNetSim",
+    "manifest": {
+      "paks": [
+        {
+          "path": "launcher",
+          "name": "NABU Launcher",
+          "options": {
+            "headlessmenu": true
+          },
+          "description": "The original headless launcher for the NABU"
+        }
+      ]
+    }
+  }
+]
