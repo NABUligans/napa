@@ -6,6 +6,8 @@ author: NABU.ca
 url: https://www.nabu.ca
 version: 1.0.4
 manifest:
+  content:
+    - path: nabu internet adapter.config.json
   sources:
     - path: https://cloud.nabu.ca/HomeBrew/titles/filesV3.json
       name: NABU.ca

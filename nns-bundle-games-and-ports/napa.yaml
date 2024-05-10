@@ -1,0 +1,71 @@
+id: nns-bundle-games-and-ports
+name: Games + Ports
+description: |
+  A collection of NABU Games and ports from other systems 
+author: The NABU Community
+version: 1.0
+manifest:
+  programs:
+    - path: arkanoid.nabu
+      name: Arkanoid
+      description: A port from the MSX by BriJohn
+      author: BriJohn
+    - path: bomberman.nabu
+      name: BomberMan
+      author: BriJohn
+      description: A port from the MSX by BriJohn
+    - path: boulderdash.nabu
+      name: BoulderDash
+      author: BriJohn
+      description: A port from the MSX by BriJohn
+    - path: choplifter.nabu
+      name: ChopLifter
+      author: BriJohn
+      description: A port from the MSX by BriJohn
+    - path: deepdundeon.nabu
+      name: Deep Dungeon Adventures
+      author: E.E Johnson
+      description: A port of from the MSX by E.E Johnson
+    - path: elevator.nabu
+      name: Elevator Action!
+      description: A port from the MSX by BriJohn
+      author: BriJohn
+    - path: hero.nabu
+      name: H.E.R.O
+      author: BriJohn
+      description: A port from the MSX by Brijohn
+    - path: hyperrally.nabu
+      name: Hyper Rally
+      author: BriJohn
+      description: A port from the MSX by BriJohn
+    - name: Invaders
+      path: 'invaders.nabu'
+      author: Production Dave
+      description: A Space Invaders clone for the Nabu by Production Dave.
+    - path: lr.nabu
+      name: Lode Runner (SMS Pad)
+      author: Licca
+      description: A port from the MSX by Licca
+    - path: riverraid.nabu
+      name: River Raid
+      author: BriJohn
+      description: A port from the MSX by BriJohn
+    - path: roadfighter.nabu
+      name: Road Fighter
+      author: BriJohn
+    - name: Snake
+      path: 'snake.nabu'
+      author: Production Dave
+      description: A Snake clone for the Nabu by Production Dave.
+    - name: Tetris
+      path: 'tetris.nabu'
+      author: Production Dave
+      description: A Tetris clone for the Nabu by Production Dave.
+    - path: thexder.nabu
+      name: Thexder
+      author: BriJohn
+      description: A port from the MSX by Brijohn
+    - path: virus.nabu
+      name: Virus
+      author: E.E Johnson
+      description: A port from the MSX by E.E Johnson

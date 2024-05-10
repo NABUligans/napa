@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ConfigCls xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <GUID>5a9bdec3-fe58-43c2-9655-bd2839747cc6</GUID>
+  <Created>1/14/2023 11:44:18 PM</Created>
+  <LastSaved>1/14/2023 11:44:18 PM</LastSaved>
+  <COM_Port>COM3</COM_Port>
+  <PromptForChannel>false</PromptForChannel>
+  <LocaSourceFolder>~\.nabuia\Local Source</LocaSourceFolder>
+  <UseLocalFolder>false</UseLocalFolder>
+  <AutoStartSerialServer>false</AutoStartSerialServer>
+  <BaudRate5>111861</BaudRate5>
+  <AutoStartTCPServer>true</AutoStartTCPServer>
+  <NABUCOMMTCPServerPort>5900</NABUCOMMTCPServerPort>
+  <RetroNetTCPServerPort>6502</RetroNetTCPServerPort>
+  <AutoStartRetroNetTCPServer>true</AutoStartRetroNetTCPServer>
+  <ClearLogWindowOnInit>true</ClearLogWindowOnInit>
+  <RetroNETStoreFolder2>~\.nabuia\Store</RetroNETStoreFolder2>
+  <CacheFolder>~\.nabuia\Cache</CacheFolder>
+  <LogHistoryLines>100</LogHistoryLines>
+  <DefaultNABUChannelFilename>cycle 1 raw</DefaultNABUChannelFilename>
+  <LogCommunicationToFile>false</LogCommunicationToFile>
+  <CommLogFilename>~\.nabuia\CommLog.txt</CommLogFilename>
+  <LogConsoleToFile>true</LogConsoleToFile>
+  <LogConsoleFilename>~\.nabuia\Console.txt</LogConsoleFilename>
+  <HeadlessEnabled>true</HeadlessEnabled>
+  <DefaultHeadlessTitle>Talky Headless v2024.04.03</DefaultHeadlessTitle>
+  <HeadlessDevelopmentMode>false</HeadlessDevelopmentMode>
+  <EnableAutoBuildCPMDrive>true</EnableAutoBuildCPMDrive>
+</ConfigCls>
